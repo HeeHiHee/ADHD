@@ -5,14 +5,14 @@ import java.util.List;
 import com.ssafy.video.model.dto.User;
 
 public interface UserService {
-
-//	public abstract List<User> getUserList(); //아래와 동일
-	List<User> getUserList();
-
-	int signup(User user);
-
+	
+	// 회원가입
+	void signup(User user);
+	
+	// 로그인
 	User login(User user);
 	
-	List<User> getSelectList(String id);
+	// 유저 한 명 조회
+	User getUserOne(String id);
 	
 }

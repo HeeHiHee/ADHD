@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +20,7 @@ import com.ssafy.video.model.service.UserService;
 import io.swagger.annotations.Api;
 
 @RestController
-@Api(tags = "사용자 컨트롤러")
+@Api(tags = "유저 컨트롤러")
 @RequestMapping("/api")
 public class UserController {
 
@@ -27,46 +28,39 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	// 전체유저가져와
-	@GetMapping("/user")
-	public List<User> userList() {
-		return userService.getUserList();
-	}
-
-	// 회원가입을 해보자 form 태그 형식으로 넘어왔다.
+	// 유저 등록하기(회원가입)
 	@PostMapping("/signup")
-	public ResponseEntity<Integer> signup(User user) {
-		int result = userService.signup(user);
-
-		// result 가 0이면 등록 x
-		// result 가 1이면 등록 o
-		return new ResponseEntity<Integer>(result, HttpStatus.CREATED);
+	public ResponseEntity<User> signup(@RequestBody User user) {
+		userService.signup(user);
+		return new ResponseEntity<User>(user, HttpStatus.CREATED);
 	}
 
+	// 로그인
 	@PostMapping("/login")
 	public ResponseEntity<?> login(User user, HttpSession session) {
-		User tmp = userService.login(user);
+		User user1 = userService.login(user);
 		// 로그인 실패 (잘못했어)
-		if (tmp == null)
+		if (user1 == null)
 			return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
 
-		session.setAttribute("loginUser", tmp.getName());
-		return new ResponseEntity<String>(tmp.getName(), HttpStatus.OK);
+		session.setAttribute("loginUser", user1.getUserId());
+		return new ResponseEntity<String>(user1.getUserId(), HttpStatus.OK);
 	}
-
+	
+	// 로그아웃
 	@GetMapping("/logout")
 	public ResponseEntity<Void> logout(HttpSession session) {
-//		session.removeAttribute("loginUser");
 		session.invalidate();
 
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
-
+	
+	// 유저아이디에 해당하는 유저 조회
 	@GetMapping("/user/{id}")
-	public ResponseEntity<List<User>> selectList(@PathVariable String id) {
-		List<User> user = userService.getSelectList(id);
+	public ResponseEntity<User> selectList(@PathVariable String id) {
+		User user = userService.getUserOne(id);
 
-		return new ResponseEntity<List<User>>(user, HttpStatus.OK);
+		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
 
 }
