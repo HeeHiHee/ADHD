@@ -23,6 +23,12 @@ public class ProductServiceImpl implements ProductService {
 		return dao.getCategoryProduct(id);
 	}
 	
+	// 상품 하나 조회
+	@Override
+	public Product getProductOne(int id) {
+		return dao.getProductOne(id);
+	}
+	
 	// 인기상품 조회
 	@Override
 	public List<Product> getBestProduct(){
@@ -48,6 +54,7 @@ public class ProductServiceImpl implements ProductService {
 		dao.writeHeart(productHeart);
 		
 	}
+
 
 	
 	

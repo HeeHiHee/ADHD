@@ -11,6 +11,9 @@ public interface ProductDao {
 	// 분류별 상품 조회
 	List<Product> getCategoryProduct(int id);
 	
+	// 상품 하나 조회
+	Product getProductOne(int id);
+	
 	// 인기 상품 조회
 	List<Product> getBestProduct();
 	

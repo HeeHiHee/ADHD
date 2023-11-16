@@ -12,9 +12,16 @@
 		WHERE (pc.parentCategoryId = #{id} OR pc.categoryId = #{id});
 	</select>
 	
+	<!-- 상품 하나 조회 -->
+	<select id="getProductOne" parameterType="int">
+		SELECT *
+		FROM Product
+		WHERE productId = #{productId};
+	</select>
+	
 	<!-- 인기 상품 조회 -->
 	<select id="getBestProduct" resultType="Product">
-		SELECT *
+		SELECT productId, productName, price, productImg, regDate, orderCnt
 		FROM Product
 		ORDER BY orderCnt DESC
 		LIMIT 10;
@@ -22,7 +29,7 @@
 	
 	<!-- 최근 상품 조회 -->
 	<select id="getLatelyProduct" resultType="Product">
-		SELECT *
+		SELECT productId, productName, price, productImg, regDate, orderCnt
 		FROM Product
 		ORDER BY regDate DESC
 		LIMIT 10;

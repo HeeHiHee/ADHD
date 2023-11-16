@@ -36,9 +36,16 @@ public class ProductController extends HttpServlet {
 	
 	// 카테고리에 해당하는 상품 리스트 추출
 	@GetMapping("/product/list/{id}")
-	public ResponseEntity<List<Product>> productList(@PathVariable int id){
+	public ResponseEntity<List<Product>> productList1(@PathVariable int id){
 		List<Product> productList = pService.getCategoryProduct(id);
 		return new ResponseEntity<List<Product>>(productList,HttpStatus.OK);		
+	}
+	
+	// 상품 하나만 추출
+	@GetMapping("/product/{id}")
+	public ResponseEntity<Product> productList2(@PathVariable int id){
+		Product product = pService.getProductOne(id);
+		return new ResponseEntity<Product>(product, HttpStatus.OK);		
 	}
 	
 	// 인기상품 리스트 추출
