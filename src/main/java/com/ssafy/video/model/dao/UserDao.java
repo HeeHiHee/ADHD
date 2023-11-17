@@ -11,5 +11,8 @@ public interface UserDao {
 	
 	// 회원가입
 	void signup(User user);
+	
+	// 유저 정보 수정
+	void updateUser(User user);
 
 }

@@ -23,18 +23,19 @@ public class UserServiceImpl implements UserService {
 	// 로그인
 	@Override
 	public User login(User user) {
-		//DB 해당 ID만 넘겨서 데이터를 가지고 오고 가지고온 User 데이터와 내가 현재 가지고 있는 user의 비밀번호를 확인하면
-		User tmp = userDao.getUserOne(user.getUserId());
-		//tmp가 실제 User 정보 일수도 있고 / null 넘어왔다.
-		if(tmp != null && tmp.getUserPw().equals(user.getUserPw()))
-			return tmp;
-		return null;
+		return userDao.getUserOne(user.getUserId());
 	}
 
 	// 유저 한 명 조회
 	@Override
 	public User getUserOne(String id) {
 		return userDao.getUserOne(id);
+	}
+	
+	// 유저 정보 수정
+	@Override
+	public void updateUser(User user) {
+		userDao.updateUser(user);		
 	}
 
 }

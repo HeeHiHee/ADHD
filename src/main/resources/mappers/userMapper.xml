@@ -16,6 +16,12 @@
 		WHERE userId = #{userId};
 	</select>
 	
+	<update id="updateUser" parameterType="User">
+	UPDATE User
+	SET userPw = #{userPw}, userPhone = #{userPhone}, userEmail = #{userEmail}, userNickname = #{userNickname}
+	WHERE userId = #{userId};
+	</update>
+	
 	
 	
 </mapper>

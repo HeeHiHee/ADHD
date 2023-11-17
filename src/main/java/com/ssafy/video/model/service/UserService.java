@@ -15,4 +15,7 @@ public interface UserService {
 	// 유저 한 명 조회
 	User getUserOne(String id);
 	
+	// 유저 정보 수정
+	void updateUser(User user);
+	
 }
