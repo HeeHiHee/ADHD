@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import com.ssafy.video.model.service.UserService;
 import com.ssafy.video.util.JwtUtil;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @Api(tags = "유저 컨트롤러")
@@ -37,6 +39,7 @@ public class UserController {
 	private UserService userService;
 
 	// 유저 등록하기(회원가입)
+	@ApiOperation("유저 등록하기(회원가입)")
 	@PostMapping("/signup")
 	public ResponseEntity<User> signup(@RequestBody User user) {
 		userService.signup(user);
@@ -44,6 +47,7 @@ public class UserController {
 	}
 
 	// 로그인
+	@ApiOperation("로그인")
 	@PostMapping("/login")
 	public ResponseEntity<Map<String, Object>> login(@RequestBody User user) {
 		Map<String, Object> result = new HashMap<String, Object>();
@@ -79,6 +83,7 @@ public class UserController {
 	}
 
 	// 유저아이디에 해당하는 유저 조회
+	@ApiOperation("유저아이디에 해당하는 유저 조회")
 	@GetMapping("/user/{id}")
 	public ResponseEntity<User> selectList(@PathVariable String id) {
 		User user = userService.getUserOne(id);
@@ -87,10 +92,19 @@ public class UserController {
 	}
 	
 	// 유저 정보 수정하기
+	@ApiOperation("유저 정보 수정하기")
 	@PutMapping("/mypage/userInfo")
 	public ResponseEntity<Void> doUpdate(@RequestBody User user){
 		userService.updateUser(user);		
 		return new ResponseEntity<Void>(HttpStatus.OK);		
+	}
+	
+	// 유저 정보 삭제(탈퇴)
+	@ApiOperation("유저 정보 삭제(탈퇴)")
+	@DeleteMapping("/user/{id}")
+	public ResponseEntity<Void> UserRemove(@PathVariable String id){
+		userService.UserRemove(id);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 	

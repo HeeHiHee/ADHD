@@ -17,7 +17,7 @@ public class DeliveryServiceImpl implements DeliveryService {
 	
 	// 배송 리스트 조회
 	@Override
-	public List<DeliveryAddress> getDeliveryAddress(int id) {
+	public List<DeliveryAddress> getDeliveryAddress(String id) {
 		return dao.getDeliveryAddress(id);
 	}
 	

@@ -37,5 +37,12 @@ public class UserServiceImpl implements UserService {
 	public void updateUser(User user) {
 		userDao.updateUser(user);		
 	}
+	
+	// 유저 정보 삭제
+	@Override
+	public void UserRemove(String id) {
+		userDao.UserRemove(id);
+		
+	}
 
 }

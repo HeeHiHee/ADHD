@@ -17,6 +17,27 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductDao dao;
 	
+	// 상품 등록
+	@Override
+	public void writeProduct(Product product) {
+		dao.writeProduct(product);
+		
+	}
+	
+	// 상품 정보 수정
+	@Override
+	public void updateProduct(Product product) {
+		dao.updateProduct(product);
+		
+	}
+	
+	// 상품 번호에 해당하는 상품 삭제
+	@Override
+	public void removeProduct(int id) {
+		dao.removeProduct(id);
+		
+	}
+	
 	// 분류별 상품 조회
 	@Override
 	public List<Product> getCategoryProduct(int id) {
@@ -40,21 +61,6 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> getLatelyProduct() {
 		return dao.getLatelyProduct();
 	}
-	
-	// 장바구니에 상품 등록
-	@Override
-	public void writeBasket(ProductShoppingBasket productShoppingBasket) {
-		dao.writeBasket(productShoppingBasket);
-		
-	}
-	
-	// 찜 상품 등록
-	@Override
-	public void writeHeart(ProductHeart productHeart) {
-		dao.writeHeart(productHeart);
-		
-	}
-
 
 	
 	

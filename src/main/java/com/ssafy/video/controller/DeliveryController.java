@@ -16,9 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.video.model.dto.DeliveryAddress;
-import com.ssafy.video.model.dto.Product;
-import com.ssafy.video.model.dto.ProductHeart;
-import com.ssafy.video.model.dto.ProductShoppingBasket;
 import com.ssafy.video.model.service.DeliveryService;
 
 import io.swagger.annotations.Api;
@@ -42,7 +39,7 @@ public class DeliveryController extends HttpServlet {
 	// 유저 아이디에 해당하는 배송지 리스트 추출
 	@ApiOperation("유저 아이디에 해당하는 배송지 리스트 추출")
 	@GetMapping("/deliveryList/{id}")
-	public ResponseEntity<List<DeliveryAddress>> deliveryList1(@PathVariable int id){
+	public ResponseEntity<List<DeliveryAddress>> deliveryList1(@PathVariable String id){
 		List<DeliveryAddress> deliveryList = dService.getDeliveryAddress(id);
 		return new ResponseEntity<List<DeliveryAddress>>(deliveryList,HttpStatus.OK);		
 	}
@@ -64,7 +61,7 @@ public class DeliveryController extends HttpServlet {
 	}
 	
 	// 배송지 수정
-	@ApiOperation("배송지 수정")
+	@ApiOperation("배송 아이디에 해당하는 배송지 수정")
 	@PostMapping("/deliveryList/update")
 	public ResponseEntity<Void> DeliveryUpdate(@RequestBody DeliveryAddress deliveryAddress){
 		dService.updateDeliveryAddress(deliveryAddress);

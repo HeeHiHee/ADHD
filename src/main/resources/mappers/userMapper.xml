@@ -17,10 +17,15 @@
 	</select>
 	
 	<update id="updateUser" parameterType="User">
-	UPDATE User
-	SET userPw = #{userPw}, userPhone = #{userPhone}, userEmail = #{userEmail}, userNickname = #{userNickname}
-	WHERE userId = #{userId};
+		UPDATE User
+		SET userPw = #{userPw}, userPhone = #{userPhone}, userEmail = #{userEmail}, userNickname = #{userNickname}
+		WHERE userId = #{userId};
 	</update>
+	
+	<delete id="UserRemove" parameterType="String">
+		DELETE FROM User
+		WHERE userId = #{userId};
+	</delete>
 	
 	
 	

@@ -31,10 +31,6 @@ public class ReviewController extends HttpServlet{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	// 의존성 주입
-	@Autowired
-	private VideoService vService;
-	
 	@Autowired
 	private ReviewService rService;
 	

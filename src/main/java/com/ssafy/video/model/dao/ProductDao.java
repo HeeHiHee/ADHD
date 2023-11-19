@@ -8,6 +8,15 @@ import com.ssafy.video.model.dto.ProductShoppingBasket;
 
 public interface ProductDao {
 	
+	// 상품 등록
+	void writeProduct(Product product);
+	
+	// 상품 정보 수정
+	void updateProduct(Product product);
+	
+	// 상품 번호에 해당하는 상품 삭제
+	void removeProduct(int id);
+	
 	// 분류별 상품 조회
 	List<Product> getCategoryProduct(int id);
 	
@@ -20,10 +29,5 @@ public interface ProductDao {
 	// 최근 상품 조회
 	List<Product> getLatelyProduct();
 	
-	// 장바구니에 상품 등록
-	void writeBasket(ProductShoppingBasket productShoppingBasket);
-	
-	// 찜 상품 등록
-	void writeHeart(ProductHeart productHeart);
 
 }
