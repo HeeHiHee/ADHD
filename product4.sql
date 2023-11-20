@@ -260,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `adhd`.`review` (
   `reviewTitle` VARCHAR(45) NOT NULL,
   `reviewDate` TIMESTAMP NULL,
   `reviewContent` VARCHAR(400) NOT NULL,
-  `reviewStar` INT NOT NULL,
+  `reviewStar` INT NULL,
   `reviewDelete` VARCHAR(1) NOT NULL,
   PRIMARY KEY (`reviewId`),
   INDEX `fk_review_product1_idx` (`productId` ASC) VISIBLE,
@@ -325,6 +325,7 @@ CREATE TABLE IF NOT EXISTS `adhd`.`managercomment` (
   `reviewId` INT NOT NULL,
   `commentContent` VARCHAR(400) NOT NULL,
   `commentDate` TIMESTAMP NOT NULL,
+  `commentDelete` VARCHAR(1) NOT NULL,
   PRIMARY KEY (`commentId`),
   UNIQUE INDEX `commentId_UNIQUE` (`commentId` ASC) VISIBLE,
   INDEX `fk_managercomment_manager1_idx` (`managerId` ASC) VISIBLE,
@@ -456,23 +457,29 @@ VALUES
 (0, 'ssafy2', '철수네', '철수', '01055554444', '', '일본', '철수집', '', 'N')
 ;
 
-
-
-SELECT *
-FROM manager;
-
 INSERT INTO manager
 VALUES
-('jjagu', '1111', '짱구', 'N'),
+('jjanggu', '1111', '짱구', 'N'),
 ('chulsu', '2222', '철수', 'N')
 ;
 
-UPDATE manager
-SET managerPw = '9999', managerName = '유리'
+INSERT INTO review
+VALUES
+(0, 17, 'ssafy1', 'R', '상품 너무 이뽀요', '2023-11-20', '어제 택배 받았는데 너무 맘에 들어요', 5, 'N'),
+(0, 23, 'ssafy2', 'Q', '환불 문의', '2023-11-20', '이거 환불 어케해여', '', 'N')
+;
+
+SELECT *
+FROM managercomment
 WHERE managerId = 'chulsu';
 
-UPDATE manager
-SET managerDelete = 'Y'
-WHERE managerId = 'chulsu';
+INSERT INTO managercomment
+VALUES
+(0, 'jjanggu', 1, '상품이 맘에 드시다니 다행이네여', '2023-11-20', 'N'),
+(0, 'chulsu', 2, '환불 안내해드리겠습니다', '2023-11-20', 'N')
+;
+
+SELECT *
+FROM managercomment;
 
 

@@ -92,7 +92,7 @@ public class UserController {
 				// 비밀번호가 일치하면 로그인 성공
 //				System.out.println(id + " " + pw);
 //				System.out.println(dbUser.getUserId() + " " + dbUser.getUserPw());
-				result.put("access-token", jwtUtil.createToken("id", id));
+				result.put("access_token", jwtUtil.createToken("id", id));
 				result.put("message", SUCCESS);
 				status = HttpStatus.ACCEPTED;
 			}
