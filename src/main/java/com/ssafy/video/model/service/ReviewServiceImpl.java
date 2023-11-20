@@ -64,6 +64,18 @@ public class ReviewServiceImpl implements ReviewService {
 	public void removeReview(int id) {
 		dao.removeReview(id);
 	}
+	
+	// 상품 아이디에 해당되는 리뷰 리스트 조회
+	@Override
+	public List<Review> getProductReview(int productId) {
+		return dao.getProductReview(productId);
+	}
+	
+	// 상품 아이디에 해당되는 문의 리스트 조회
+	@Override
+	public List<Review> getProductQuestion(int productId) {
+		return dao.getProductQuestion(productId);
+	}
 
 
 

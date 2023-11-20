@@ -85,4 +85,20 @@ public class ReviewController extends HttpServlet{
 		List<Review> questionList = rService.getQuestion();
 		return new ResponseEntity<List<Review>>(questionList,HttpStatus.OK);		
 	}
+	
+	// 상품 아이디에 해당되는 리뷰 리스트 조회
+	@ApiOperation("상품 아이디에 해당되는 리뷰 리스트 조회")
+	@GetMapping("/productReviewList")
+	public ResponseEntity<List<Review>> ProductReviewList(int productId){
+		List<Review> productReviewList = rService.getProductReview(productId);
+		return new ResponseEntity<List<Review>>(productReviewList,HttpStatus.OK);		
+	}
+	
+	// 상품 아이디에 해당되는 문의 리스트 조회
+	@ApiOperation("상품 아이디에 해당되는 문의 리스트 조회")
+	@GetMapping("/productQuestionList")
+	public ResponseEntity<List<Review>> ProductQuestionList(int productId){
+		List<Review> productQuestionList = rService.getProductQuestion(productId);
+		return new ResponseEntity<List<Review>>(productQuestionList,HttpStatus.OK);		
+	}
 }
