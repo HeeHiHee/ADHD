@@ -30,8 +30,8 @@ public class UserController {
 	// 응답을 편하게 하기 위해 상수로 지정
 	private static final String SUCCESS = "success";
 	private static final String FAIL = "fail";
-	private static final String FAIL_ID = "ID exists";
-	private static final String FAIL_NICK = "NICKNAME exists";
+//	private static final String FAIL_ID = "ID exists";
+//	private static final String FAIL_NICK = "NICKNAME exists";
 
 	@Autowired
 	private JwtUtil jwtUtil;
@@ -59,12 +59,12 @@ public class UserController {
 		else {
 			// 아이디가 겹칠 때
 			if(dbUser1 != null) {
-				result.put("message", FAIL_ID);
+				result.put("message", 1);
 				status = HttpStatus.INTERNAL_SERVER_ERROR;				
 			}
 			// 닉네임이 겹칠때
 			else {
-				result.put("message", FAIL_NICK);
+				result.put("message", 2);
 				status = HttpStatus.INTERNAL_SERVER_ERROR;
 			}
 		}

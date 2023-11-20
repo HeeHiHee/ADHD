@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ssafy.video.model.dto.Manager;
 import com.ssafy.video.model.dto.ManagerComment;
+import com.ssafy.video.model.dto.ManagerNotice;
 
 public interface ManagerService {
 	
@@ -32,4 +33,35 @@ public interface ManagerService {
 	
 	// 댓글 아이디에 맞는 관리자 댓글 하나 삭제
 	void removeManagerComment(int id);
+	
+	
+	
+	// 공지사항 등록
+	void writeManagerNotice(ManagerNotice managerNotice);
+	
+	// 공지사항 전체 리스트
+	List<ManagerNotice> getManagerNoticeList();
+	
+	// 이벤트 전체 리스트
+	List<ManagerNotice> getManagerEventList();
+	
+	// 관리자 마다의 공지사항 리스트
+	List<ManagerNotice> getManagerNotice(String managerId);
+	
+	// 공지사항 수정
+	void updateManagerNotice(ManagerNotice managerNotice);
+	
+	// 공지사항 삭제
+	void removeManagerNotice(int id);
+	
+	// 공지사항 상세
+	ManagerNotice getOneManagerNotice(int id);
+	
+	
+	
+	
+	
+	
+	
+	
 }

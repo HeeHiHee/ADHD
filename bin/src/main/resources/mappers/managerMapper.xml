@@ -58,63 +58,6 @@
 		WHERE commentId = #{commentId}
 	</update>
 	
-	<!-- 공지사항 등록 -->
-	<insert id="writeManagerNotice" parameterType="ManagerNotice">
-		INSERT INTO ManagerNotice
-		VALUES
-		(0, #{managerId}, #{noticeType}, #{noticeTitle}, #{noticeContent}, #{noticeWriter}, #{noticeImg}, 0, #{noticeDate}, 'N')
-	</insert>
-	
-	<!-- 공지사항 전체 리스트 -->
-	<select id="getManagerNoticeList" resultType="ManagerNotice">
-		SELECT *
-		FROM ManagerNotice
-		WHERE noticeDelete = 'N' AND noticeType = 'N'
-	</select>
-	
-	<!-- 이벤트 전체 리스트 -->
-	<select id="getManagerEventList" resultType="ManagerNotice">
-		SELECT *
-		FROM ManagerNotice
-		WHERE noticeDelete = 'N' AND noticeType = 'E'
-	</select>
-	
-	<!-- 관리자 마다의 공지사항 리스트 -->
-	<select id="getManagerNotice" parameterType="String" resultType="ManagerNotice">
-		SELECT *
-		FROM ManagerNotice
-		WHERE managerId = #{managerId}
-	</select>
-	
-	<!-- 공지사항 수정 -->
-	<update id="updateManagerNotice" parameterType="ManagerNotice">
-		UPDATE ManagerNotice
-		SET managerId = #{managerId}, noticeType = #{noticeType}, noticeTitle = #{noticeTitle}, noticeContent = #{noticeContent},
-			noticeWriter = #{noticeWriter}, noticeImg = #{noticeImg}, noticeDate = #{noticeDate}
-		WHERE noticeId = #{noticeId}
-	</update>
-	
-	<!-- 공지사항 삭제 -->
-	<update id="removeManagerNotice" parameterType="int">
-		UPDATE ManagerNotice
-		SET noticeDelete = 'Y'
-		WHERE noticeId = #{noticeId}
-	</update>
-	
-	<!-- 공지사항 상세 조회 -->
-	<select id="getOneManagerNotice" resultType="ManagerNotice" parameterType="int">
-		SELECT *
-		FROM ManagerNotice
-		WHERE noticeId = #{noticeId}
-	</select>
-	
-	<!-- 조회수 증가 -->
-	<update id="updateViewCnt" parameterType="int">
-		update ManagerNotice
-		set `noticeViews` = noticeViews +1  
-		where noticeId = #{noticeId}
-	</update>
-	
 	
 	
 </mapper>

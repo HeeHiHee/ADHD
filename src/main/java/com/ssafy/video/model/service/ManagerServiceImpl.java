@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.ssafy.video.model.dao.ManagerDao;
 import com.ssafy.video.model.dto.Manager;
 import com.ssafy.video.model.dto.ManagerComment;
+import com.ssafy.video.model.dto.ManagerNotice;
 
 @Service
 public class ManagerServiceImpl implements ManagerService {
@@ -68,6 +69,53 @@ public class ManagerServiceImpl implements ManagerService {
 	public void removeManagerComment(int id) {
 		dao.removeManagerComment(id);
 		
+	}
+
+	
+	
+	// 공지사항 등록
+	@Override
+	public void writeManagerNotice(ManagerNotice managerNotice) {
+		dao.writeManagerNotice(managerNotice);
+		
+	}
+	
+	// 공지사항 전체 리스트
+	@Override
+	public List<ManagerNotice> getManagerNoticeList() {
+		return dao.getManagerNoticeList();
+	}
+	
+	// 이벤트 전체 리스트
+	@Override
+	public List<ManagerNotice> getManagerEventList() {
+		return dao.getManagerEventList();
+	}	
+
+	// 관리자 마다의 공지사항 리스트
+	@Override
+	public List<ManagerNotice> getManagerNotice(String managerId) {
+		return dao.getManagerNotice(managerId);
+	}
+	
+	// 공지사항 수정
+	@Override
+	public void updateManagerNotice(ManagerNotice managerNotice) {
+		dao.updateManagerNotice(managerNotice);
+	}
+
+	// 공지사항 삭제
+	@Override
+	public void removeManagerNotice(int id) {
+		dao.removeManagerNotice(id);
+		
+	}
+	
+	// 공지사항 상세
+	@Override
+	public ManagerNotice getOneManagerNotice(int id) {
+		dao.updateViewCnt(id);
+		return dao.getOneManagerNotice(id);
 	}
 	
 
