@@ -49,7 +49,7 @@ public class UserController {
 	// 로그인
 	@ApiOperation("로그인")
 	@PostMapping("/login")
-	public ResponseEntity<Map<String, Object>> login(@RequestBody User user) {
+	public ResponseEntity<Map<String, Object>> login(String id, String pw) {
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		// User Service -> DAO -> DB //실제 유저인지 아닌지 확인 등등등....
@@ -59,20 +59,21 @@ public class UserController {
 		// User의 id가 Null이 아니거나 뭔가 작성이 되어있다면 로그인 성공 이라고 가정
 		try {
 			// 입력받은 유저의 아이디를 이용해 db에서 유저를 가져옴
-			User dbUser = userService.login(user);
+			User dbUser = userService.login(id);
 
 			// db에 저장된 유저의 비밀번호랑 입력받은 유저의 비밀번호를 비교
-			if (dbUser != null && user.getUserPw().equals(dbUser.getUserPw())) {
+			if (dbUser != null && pw.equals(dbUser.getUserPw())) {
 				// 비밀번호가 일치하면 로그인 성공
-				System.out.println(user);
-				result.put("access-token", jwtUtil.createToken("id", user.getUserId()));
+				System.out.println(id + " " + pw);
+				System.out.println(dbUser.getUserId() + " " + dbUser.getUserPw());
+				result.put("access-token", jwtUtil.createToken("id", id));
 				result.put("message", SUCCESS);
 				status = HttpStatus.ACCEPTED;
 			}
 			// 로그인 실패!
 			else {
 				result.put("message", FAIL);
-				status = HttpStatus.NO_CONTENT;
+				status = HttpStatus.INTERNAL_SERVER_ERROR;
 			}
 		} catch (UnsupportedEncodingException e) {
 			result.put("message", FAIL);
@@ -99,11 +100,19 @@ public class UserController {
 		return new ResponseEntity<Void>(HttpStatus.OK);		
 	}
 	
-	// 유저 정보 삭제(탈퇴)
-	@ApiOperation("유저 정보 삭제(탈퇴)")
-	@DeleteMapping("/user/{id}")
-	public ResponseEntity<Void> UserRemove(@PathVariable String id){
-		userService.UserRemove(id);
+	// 유저 탈퇴 
+	@ApiOperation("유저 탈퇴")
+	@PutMapping("/usercancel/{id}")
+	public ResponseEntity<Void> UserCancel(@PathVariable String id){
+		userService.UserCancel(id);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
+	// 유저 정지
+	@ApiOperation("유저 정지")
+	@PutMapping("/userban/{id}")
+	public ResponseEntity<Void> UserBan(@PathVariable String id){
+		userService.UserBan(id);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	

@@ -10,7 +10,7 @@ public interface UserService {
 	void signup(User user);
 	
 	// 로그인
-	User login(User user);
+	User login(String id);
 	
 	// 유저 한 명 조회
 	User getUserOne(String id);
@@ -18,7 +18,10 @@ public interface UserService {
 	// 유저 정보 수정
 	void updateUser(User user);
 	
-	// 유저 정보 삭제
-	void UserRemove(String id);
+	// 유저 탈퇴
+	void UserCancel(String id);
+	
+	// 유저 정지
+	void UserBan(String id);
 	
 }

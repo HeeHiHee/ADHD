@@ -56,13 +56,11 @@ public class ProductController extends HttpServlet {
 	
 	// 상품 번호에 해당하는 상품 삭제
 	@ApiOperation("상품 번호에 해당하는 상품 삭제")
-	@DeleteMapping("/product/{id}")
+	@PutMapping("/product/{id}")
 	public ResponseEntity<Void> productRemove(@PathVariable int id){
 		pService.removeProduct(id);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
-	
-	
 	
 	
 	// 카테고리에 해당하는 상품 리스트 추출

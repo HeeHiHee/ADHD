@@ -6,17 +6,24 @@ import com.ssafy.video.model.dto.Review;
 
 public interface ReviewDao {
 	
-	List<Review> select();
+	// 리뷰 전체 리스트 조회
+	List<Review> getReview();
 	
-	List<Review> selectList(String videoid);
+	// 문의 전체 리스트 조회
+	List<Review> getQuestion();
 	
-	void insertReview(Review review);
+//	List<Review> selectList(String videoid);
 	
-	Review selectOne(int reviewid);
+	// 리뷰 등록
+	void writeReview(Review review);
 	
+//	Review selectOne(int reviewid);
+	
+	// 리뷰 수정
 	void updateReview(Review review);
 	
-	void deleteReview(int reviewid);
+	// 리뷰 삭제
+	void removeReview(int reviewid);
 	
-	void updateViewCnt(int reviewid);
+//	void updateViewCnt(int reviewid);
 }

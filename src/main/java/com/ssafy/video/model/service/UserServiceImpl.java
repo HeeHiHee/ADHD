@@ -22,8 +22,8 @@ public class UserServiceImpl implements UserService {
 
 	// 로그인
 	@Override
-	public User login(User user) {
-		return userDao.getUserOne(user.getUserId());
+	public User login(String id) {
+		return userDao.getUserOne(id);
 	}
 
 	// 유저 한 명 조회
@@ -38,10 +38,17 @@ public class UserServiceImpl implements UserService {
 		userDao.updateUser(user);		
 	}
 	
-	// 유저 정보 삭제
+	// 유저 탈퇴
 	@Override
-	public void UserRemove(String id) {
-		userDao.UserRemove(id);
+	public void UserCancel(String id) {
+		userDao.UserCancel(id);
+		
+	}
+	
+	// 유저 정지
+	@Override
+	public void UserBan(String id) {
+		userDao.UserBan(id);
 		
 	}
 

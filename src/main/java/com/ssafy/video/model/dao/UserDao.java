@@ -15,7 +15,10 @@ public interface UserDao {
 	// 유저 정보 수정
 	void updateUser(User user);
 	
-	// 유저 정보 삭제
-	void UserRemove(String id);
+	// 유저 탈퇴
+	void UserCancel(String id);
+	
+	// 유저 탈퇴
+	void UserBan(String id);
 
 }

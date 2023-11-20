@@ -10,13 +10,14 @@ public class DeliveryAddress {
 	private String deliveryAddress1;
 	private String deliveryAddress2;
 	private String deliveryMemo;
+	private String defaultAddress;
 	
 	public DeliveryAddress() {
 	}
 
 	public DeliveryAddress(int deliveryAddressId, String userId, String deliveryName, String receiverName,
 			String receiverPhone, String additionalPhone, String deliveryAddress1, String deliveryAddress2,
-			String deliveryMemo) {
+			String deliveryMemo, String defaultAddress) {
 		super();
 		this.deliveryAddressId = deliveryAddressId;
 		this.userId = userId;
@@ -27,6 +28,7 @@ public class DeliveryAddress {
 		this.deliveryAddress1 = deliveryAddress1;
 		this.deliveryAddress2 = deliveryAddress2;
 		this.deliveryMemo = deliveryMemo;
+		this.defaultAddress = defaultAddress;
 	}
 
 	public int getDeliveryAddressId() {
@@ -99,17 +101,26 @@ public class DeliveryAddress {
 
 	public void setDeliveryMemo(String deliveryMemo) {
 		this.deliveryMemo = deliveryMemo;
+	}	
+	
+
+	public String getDefaultAddress() {
+		return defaultAddress;
+	}
+
+	public void setDefaultAddress(String defaultAddress) {
+		this.defaultAddress = defaultAddress;
 	}
 
 	@Override
 	public String toString() {
-		return "ProductDeliveryAddress [deliveryAddressId=" + deliveryAddressId + ", userId=" + userId
-				+ ", deliveryName=" + deliveryName + ", receiverName=" + receiverName + ", receiverPhone="
-				+ receiverPhone + ", additionalPhone=" + additionalPhone + ", deliveryAddress1=" + deliveryAddress1
-				+ ", deliveryAddress2=" + deliveryAddress2 + ", deliveryMemo=" + deliveryMemo + "]";
+		return "DeliveryAddress [deliveryAddressId=" + deliveryAddressId + ", userId=" + userId + ", deliveryName="
+				+ deliveryName + ", receiverName=" + receiverName + ", receiverPhone=" + receiverPhone
+				+ ", additionalPhone=" + additionalPhone + ", deliveryAddress1=" + deliveryAddress1
+				+ ", deliveryAddress2=" + deliveryAddress2 + ", deliveryMemo=" + deliveryMemo + ", defaultAddress="
+				+ defaultAddress + "]";
 	}
-	
-	
-	
+
+		
 
 }

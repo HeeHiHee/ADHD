@@ -16,16 +16,26 @@
 		WHERE userId = #{userId};
 	</select>
 	
+	<!-- 유저 이름, 상태는 변경불가 -->
 	<update id="updateUser" parameterType="User">
 		UPDATE User
-		SET userPw = #{userPw}, userPhone = #{userPhone}, userEmail = #{userEmail}, userNickname = #{userNickname}
+		SET userPw = #{userPw}, userPhone = #{userPhone}, userEmail = #{userEmail}, userNickname = #{userNickname}, manager = false, userStatus='Y'
 		WHERE userId = #{userId};
 	</update>
 	
-	<delete id="UserRemove" parameterType="String">
-		DELETE FROM User
+	<!-- 유저 탈퇴 -->
+	<update id="UserCancel" parameterType="String">
+		UPDATE User
+		SET userStatus='C'
 		WHERE userId = #{userId};
-	</delete>
+	</update>
+	
+	<!-- 유저 정지 -->
+	<update id="UserBan" parameterType="String">
+		UPDATE User
+		SET userStatus='B'
+		WHERE userId = #{userId};
+	</update>
 	
 	
 	

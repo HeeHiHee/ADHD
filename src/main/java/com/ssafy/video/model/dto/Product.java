@@ -13,12 +13,13 @@ public class Product {
 	private boolean soldOut;
 	private String regDate;
 	private int orderCnt;
+	private String productDelete;
 	
 	public Product() {
 	}
 	
 	public Product(int productId, int categoryId, String productName, int cost, int price, int profit,
-			String productImg, String productInfoImg, boolean soldOut, String regDate, int orderCnt) {
+			String productImg, String productInfoImg, boolean soldOut, String regDate, int orderCnt, String productDelete) {
 		super();
 		this.productId = productId;
 		this.categoryId = categoryId;
@@ -31,6 +32,7 @@ public class Product {
 		this.soldOut = soldOut;
 		this.regDate = regDate;
 		this.orderCnt = orderCnt;
+		this.productDelete = productDelete;
 	}
 
 	public int getProductId() {
@@ -121,14 +123,22 @@ public class Product {
 		this.orderCnt = orderCnt;
 	}
 
+	public String getProductDelete() {
+		return productDelete;
+	}
+
+	public void setProductDelete(String productDelete) {
+		this.productDelete = productDelete;
+	}
+
 	@Override
 	public String toString() {
 		return "Product [productId=" + productId + ", categoryId=" + categoryId + ", productName=" + productName
 				+ ", cost=" + cost + ", price=" + price + ", profit=" + profit + ", productImg=" + productImg
 				+ ", productInfoImg=" + productInfoImg + ", soldOut=" + soldOut + ", regDate=" + regDate + ", orderCnt="
-				+ orderCnt + "]";
+				+ orderCnt + ", productDelete=" + productDelete + "]";
 	}
-	
+
 	
 
 }

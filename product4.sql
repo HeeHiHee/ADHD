@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `adhd`.`deliveryaddress` (
   `deliveryAddress1` VARCHAR(45) NOT NULL,
   `deliveryAddress2` VARCHAR(45) NOT NULL,
   `deliveryMemo` VARCHAR(100) NULL,
-  `default` VARCHAR(45) NOT NULL,
+  `defaultAddress` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`deliveryAddressId`),
   UNIQUE INDEX `deliveryAddressId_UNIQUE` (`deliveryAddressId` ASC) VISIBLE,
   INDEX `fk_deliveryAddress_User1_idx` (`userId` ASC) VISIBLE,
@@ -261,6 +261,7 @@ CREATE TABLE IF NOT EXISTS `adhd`.`review` (
   `reviewDate` TIMESTAMP NULL,
   `reviewContent` VARCHAR(400) NOT NULL,
   `reviewStar` INT NOT NULL,
+  `reviewDelete` VARCHAR(1) NOT NULL,
   PRIMARY KEY (`reviewId`),
   INDEX `fk_review_product1_idx` (`productId` ASC) VISIBLE,
   INDEX `fk_review_user1_idx` (`userId` ASC) VISIBLE,
@@ -285,6 +286,7 @@ CREATE TABLE IF NOT EXISTS `adhd`.`manager` (
   `managerId` VARCHAR(45) NOT NULL,
   `managerPw` VARCHAR(45) NOT NULL,
   `managerName` VARCHAR(45) NOT NULL,
+  `managerDelete` VARCHAR(1) NOT NULL,
   PRIMARY KEY (`managerId`),
   UNIQUE INDEX `managerId_UNIQUE` (`managerId` ASC) VISIBLE)
 ENGINE = InnoDB;
@@ -455,5 +457,22 @@ VALUES
 ;
 
 
-SELECT * 
-FROM deliveryaddress;
+
+SELECT *
+FROM manager;
+
+INSERT INTO manager
+VALUES
+('jjagu', '1111', '짱구', 'N'),
+('chulsu', '2222', '철수', 'N')
+;
+
+UPDATE manager
+SET managerPw = '9999', managerName = '유리'
+WHERE managerId = 'chulsu';
+
+UPDATE manager
+SET managerDelete = 'Y'
+WHERE managerId = 'chulsu';
+
+

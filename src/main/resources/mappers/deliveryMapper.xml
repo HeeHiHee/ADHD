@@ -22,13 +22,13 @@
 	<insert id="writeDeliveryAddress" parameterType="DeliveryAddress">
 		INSERT INTO DeliveryAddress
 		VALUES
-		(0, #{userId}, #{deliveryName}, #{receiverName}, #{receiverPhone}, #{additionalPhone}, #{deliveryAddress1}, #{deliveryAddress2}, #{deliveryMemo})
+		(0, #{userId}, #{deliveryName}, #{receiverName}, #{receiverPhone}, #{additionalPhone}, #{deliveryAddress1}, #{deliveryAddress2}, #{deliveryMemo}, #{defaultAddress})
 	</insert>
 	
 	<!-- 배송지 수정 -->
 	<update id="updateDeliveryAddress" parameterType="DeliveryAddress">
 		UPDATE DeliveryAddress
-		SET receiverName = #{receiverName}, receiverPhone = #{receiverPhone}, additionalPhone = #{additionalPhone}, deliveryAddress1 = #{deliveryAddress1}, deliveryAddress2 = #{deliveryAddress2}, deliveryMemo = #{deliveryMemo}
+		SET receiverName = #{receiverName}, receiverPhone = #{receiverPhone}, additionalPhone = #{additionalPhone}, deliveryAddress1 = #{deliveryAddress1}, deliveryAddress2 = #{deliveryAddress2}, deliveryMemo = #{deliveryMemo}, defaultAddress = #{defaultAddress}
 		WHERE deliveryAddressId = #{deliveryAddressId}
 	</update>
 	

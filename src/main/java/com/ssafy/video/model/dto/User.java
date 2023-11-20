@@ -8,12 +8,13 @@ public class User {
 	private String userEmail;
 	private String userNickname;
 	private boolean manager; // true이면 1, false이면 0
+	private String userStatus; // Y, B, C
 	
 	public User() {
 	}
 
 	public User(String userId, String userPw, String userName, String userPhone, String userEmail, String userNickname,
-			boolean manager) {
+			boolean manager, String userStatus) {
 		super();
 		this.userId = userId;
 		this.userPw = userPw;
@@ -22,6 +23,7 @@ public class User {
 		this.userEmail = userEmail;
 		this.userNickname = userNickname;
 		this.manager = manager;
+		this.userStatus = userStatus;
 	}
 
 	public String getUserId() {
@@ -78,13 +80,25 @@ public class User {
 
 	public void setManager(boolean manager) {
 		this.manager = manager;
+	}	
+	
+
+	public String getUserStatus() {
+		return userStatus;
+	}
+
+	public void setUserStatus(String userStatus) {
+		this.userStatus = userStatus;
 	}
 
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", userPw=" + userPw + ", userName=" + userName + ", userPhone=" + userPhone
-				+ ", userEmail=" + userEmail + ", userNickname=" + userNickname + ", manager=" + manager + "]";
+				+ ", userEmail=" + userEmail + ", userNickname=" + userNickname + ", manager=" + manager
+				+ ", userStatus=" + userStatus + "]";
 	}
+
+	
 	
 	
 	
