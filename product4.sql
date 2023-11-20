@@ -304,7 +304,8 @@ CREATE TABLE IF NOT EXISTS `adhd`.`managernotice` (
   `noticeWriter` VARCHAR(45) NOT NULL,
   `noticeImg` VARCHAR(400) NULL,
   `noticeViews` INT NOT NULL,
-  `noticeDate` TIMESTAMP NULL DEFAULT NOW(),
+  `noticeDate` TIMESTAMP NOT NULL,
+  `noticeDelete` VARCHAR(1) NOT NULL,
   PRIMARY KEY (`noticeId`),
   UNIQUE INDEX `noticeId_UNIQUE` (`noticeId` ASC) VISIBLE,
   INDEX `fk_notice_manager1_idx` (`managerId` ASC) VISIBLE,
@@ -466,18 +467,17 @@ VALUES
 INSERT INTO review
 VALUES
 (0, 17, 'ssafy1', 'R', '상품 너무 이뽀요', '2023-11-20', '어제 택배 받았는데 너무 맘에 들어요', 5, 'N'),
-(0, 23, 'ssafy2', 'Q', '환불 문의', '2023-11-20', '이거 환불 어케해여', '', 'N')
+(0, 23, 'ssafy2', 'Q', '환불 문의', '2023-11-20', '이거 환불 어케해여', NULL, 'N')
 ;
-
-SELECT *
-FROM managercomment
-WHERE managerId = 'chulsu';
 
 INSERT INTO managercomment
 VALUES
 (0, 'jjanggu', 1, '상품이 맘에 드시다니 다행이네여', '2023-11-20', 'N'),
 (0, 'chulsu', 2, '환불 안내해드리겠습니다', '2023-11-20', 'N')
 ;
+
+SELECT *
+FROM review;
 
 SELECT *
 FROM managercomment;

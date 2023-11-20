@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.video.model.dto.Review;
+import com.ssafy.video.model.service.ManagerService;
 import com.ssafy.video.model.service.ReviewService;
-import com.ssafy.video.model.service.VideoService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -36,11 +35,15 @@ public class ReviewController extends HttpServlet{
 	@Autowired
 	private ReviewService rService;
 	
+	@Autowired
+	private ManagerService mService;
+	
 	// 리뷰 번호에 해당하는 리뷰 삭제
 	@ApiOperation("리뷰/문의 번호에 해당하는 리뷰/문의 삭제")
 	@PutMapping("/review/{id}")
 	public ResponseEntity<Void> reviewRemove(@PathVariable int id){
 		rService.removeReview(id);
+		mService.removeManagerComment(id);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
@@ -49,7 +52,7 @@ public class ReviewController extends HttpServlet{
 	@PutMapping("/review/update")
 	public ResponseEntity<Void> reviewUpdate(@RequestBody Review review){		
 		rService.updateReview(review);		
-		return new ResponseEntity<Void>(HttpStatus.OK);		
+		return new ResponseEntity<Void>(HttpStatus.OK);	
 	}
 	
 //	@GetMapping("/review/{id}")
