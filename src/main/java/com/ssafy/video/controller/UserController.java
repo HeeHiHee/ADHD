@@ -30,6 +30,8 @@ public class UserController {
 	// 응답을 편하게 하기 위해 상수로 지정
 	private static final String SUCCESS = "success";
 	private static final String FAIL = "fail";
+	private static final String FAIL_ID = "ID exists";
+	private static final String FAIL_NICK = "NICKNAME exists";
 
 	@Autowired
 	private JwtUtil jwtUtil;
@@ -41,9 +43,33 @@ public class UserController {
 	// 유저 등록하기(회원가입)
 	@ApiOperation("유저 등록하기(회원가입)")
 	@PostMapping("/signup")
-	public ResponseEntity<User> signup(@RequestBody User user) {
-		userService.signup(user);
-		return new ResponseEntity<User>(user, HttpStatus.CREATED);
+	public ResponseEntity<Map<String, Object>> signup(@RequestBody User user) throws UnsupportedEncodingException {
+		Map<String, Object> result = new HashMap<String, Object>();
+		HttpStatus status = null;
+		
+		User dbUser1 = userService.getUserOne(user.getUserId());
+		User dbUser2 = userService.getUserNick(user.getUserNickname());
+		
+		// null 값이면 id가 중복되는 게 없으므로 회원가입 성공
+		if(dbUser1 == null && dbUser2 == null) {
+			userService.signup(user);
+			result.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		}
+		else {
+			// 아이디가 겹칠 때
+			if(dbUser1 != null) {
+				result.put("message", FAIL_ID);
+				status = HttpStatus.INTERNAL_SERVER_ERROR;				
+			}
+			// 닉네임이 겹칠때
+			else {
+				result.put("message", FAIL_NICK);
+				status = HttpStatus.INTERNAL_SERVER_ERROR;
+			}
+		}
+		
+		return new ResponseEntity<Map<String, Object>>(result, status);
 	}
 
 	// 로그인
@@ -64,8 +90,8 @@ public class UserController {
 			// db에 저장된 유저의 비밀번호랑 입력받은 유저의 비밀번호를 비교
 			if (dbUser != null && pw.equals(dbUser.getUserPw())) {
 				// 비밀번호가 일치하면 로그인 성공
-				System.out.println(id + " " + pw);
-				System.out.println(dbUser.getUserId() + " " + dbUser.getUserPw());
+//				System.out.println(id + " " + pw);
+//				System.out.println(dbUser.getUserId() + " " + dbUser.getUserPw());
 				result.put("access-token", jwtUtil.createToken("id", id));
 				result.put("message", SUCCESS);
 				status = HttpStatus.ACCEPTED;

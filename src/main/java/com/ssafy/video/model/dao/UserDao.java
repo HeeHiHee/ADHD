@@ -9,6 +9,9 @@ public interface UserDao {
 	// 유저 한 명 조회
 	User getUserOne(String id);
 	
+	// 유저 닉네임 조회
+	User getUserNick(String nick);
+	
 	// 회원가입
 	void signup(User user);
 	

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ssafy.video.model.dao.ManagerDao;
 import com.ssafy.video.model.dto.Manager;
+import com.ssafy.video.model.dto.ManagerComment;
 
 @Service
 public class ManagerServiceImpl implements ManagerService {
@@ -37,6 +38,36 @@ public class ManagerServiceImpl implements ManagerService {
 	@Override
 	public void removeManager(String id) {
 		dao.removeManager(id);
+	}
+	
+	
+	
+	
+	
+	
+	// 관리자 댓글 등록
+	@Override
+	public void writeManagerComment(ManagerComment managerComment) {
+		dao.writeManagerComment(managerComment);		
+	}
+	
+	// 관리자 아이디에 해당하는 댓글 리스트 가져오기
+	@Override
+	public List<ManagerComment> getManagerCommentList(String managerId) {
+		return dao.getManagerCommentList(managerId);
+	}
+	
+	// 관리자 댓글 수정
+	@Override
+	public void updateManagerComment(ManagerComment managerComment) {
+		dao.updateManagerComment(managerComment);		
+	}
+	
+	// 댓글 아이디에 맞는 관리자 댓글 하나 삭제
+	@Override
+	public void removeManagerComment(int id) {
+		dao.removeManagerComment(id);
+		
 	}
 	
 

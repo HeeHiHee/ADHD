@@ -13,22 +13,51 @@
 	<!-- 관리자 등록 -->
 	<insert id="writeManager" parameterType="Manager">
 		INSERT INTO manager
-		VALUES(#{managerId}, #{managerPw}, #{managerName}, #{managerDelete})
+		VALUES(#{managerId}, #{managerPw}, #{managerName}, 'N')
 	</insert>
 	
 	<!-- 관리자 수정 -->
 	<update id="updateManager" parameterType="Manager">
 		UPDATE manager
 		SET managerPw = #{managerPw}, managerName = #{managerName}
-		WHERE managerId = #{managerId};
+		WHERE managerId = #{managerId}
 	</update>
 	
 	<!-- 관리자 삭제 -->
-	<update id="removeReview" parameterType="String">
+	<update id="removeManager" parameterType="String">
 		UPDATE manager
 		SET managerDelete = 'Y'
-		WHERE managerId = #{managerId};
+		WHERE managerId = #{managerId}
 	</update>
+	
+	<!-- 관리자 댓글 등록 -->
+	<insert id="writeManagerComment" parameterType="ManagerComment">
+		INSERT INTO ManagerComment
+		VALUES
+		(0, #{managerId}, #{reviewId}, #{commentContent}, #{commentDate}, 'N')
+	</insert>
+	
+	<!-- 관리자 아이디에 해당하는 댓글 리스트 가져오기 -->
+	<select id="getManagerCommentList" parameterType="String" resultType="ManagerComment">
+		SELECT *
+		FROM ManagerComment
+		WHERE managerId = #{managerId}
+	</select>
+	
+	<!-- 관리자 댓글 수정 -->
+	<update id="updateManagerComment" parameterType="ManagerComment">
+		UPDATE ManagerComment
+		SET managerId = #{managerId}, reviewId = #{reviewId}, commentContent = #{commentContent}, commentDate = #{commentDate}
+		WHERE commentId = #{commentId}
+	</update>
+	
+	<!-- 댓글 아이디에 맞는 관리자 댓글 하나 삭제 -->
+	<update id="removeManagerComment" parameterType="int">
+		UPDATE ManagerComment
+		SET commentDelete = 'Y'
+		WHERE commentId = #{commentId}
+	</update>
+	
 	
 	
 </mapper>

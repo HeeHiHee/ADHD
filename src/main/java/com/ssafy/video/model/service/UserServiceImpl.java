@@ -32,6 +32,12 @@ public class UserServiceImpl implements UserService {
 		return userDao.getUserOne(id);
 	}
 	
+	// 닉네임에 맞는 유저 조회
+	@Override
+	public User getUserNick(String nick) {
+		return userDao.getUserNick(nick);
+	}
+	
 	// 유저 정보 수정
 	@Override
 	public void updateUser(User user) {

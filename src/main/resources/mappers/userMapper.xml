@@ -7,13 +7,20 @@
 	<insert id="signup" parameterType="User">
 		INSERT INTO User
 		VALUES
-		(#{userId}, #{userPw}, #{userName}, #{userPhone}, #{userEmail}, #{userNickname}, false)
+		(#{userId}, #{userPw}, #{userName}, #{userPhone}, #{userEmail}, #{userNickname}, false, 'Y')
 	</insert>
 	
 	<select id="getUserOne" parameterType="String" resultType="User">
 		SELECT * 
 		FROM User
 		WHERE userId = #{userId};
+	</select>
+	
+	<!-- 유저 닉네임 조회 -->
+	<select id="getUserNick" parameterType="String" resultType="User">
+		SELECT * 
+		FROM User
+		WHERE userNickname = #{userNickname};
 	</select>
 	
 	<!-- 유저 이름, 상태는 변경불가 -->
