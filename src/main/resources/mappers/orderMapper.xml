@@ -3,6 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.video.model.dao.OrderDao">
+
+	<!-- 상품 구매량 증가 -->
+	<update id="updateOrderCnt" parameterType="int">
+		UPDATE Product
+		SET `orderCnt` = orderCnt +1  
+		WHERE productId = #{productId}
+	</update>
 	
 	<!-- 주문내역 등록 -->
 	<insert id="writeOrder" parameterType="ProductOrder">

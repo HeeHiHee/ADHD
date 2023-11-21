@@ -77,6 +77,18 @@ public class ReviewServiceImpl implements ReviewService {
 		return dao.getProductQuestion(productId);
 	}
 
+	// 유저 아이디에 해당되는 리뷰 리스트 조회
+	@Override
+	public List<Review> getUserReview(String userId) {
+		return dao.getUserReview(userId);
+	}
+
+	// 유저 아이디에 해당되는 문의 리스트 조회
+	@Override
+	public List<Review> getUserQuestion(String userId) {
+		return dao.getUserQuestion(userId);
+	}
+
 
 
 	

@@ -30,6 +30,12 @@ public interface ReviewService {
 		
 		// 상품 아이디에 해당되는 문의 리스트 조회
 		List<Review> getProductQuestion(int productId);
+		
+		// 유저 아이디에 해당되는 리뷰 리스트 조회
+		List<Review> getUserReview(String userId);
+
+		// 유저 아이디에 해당되는 문의 리스트 조회
+		List<Review> getUserQuestion(String userId);
 
 //		Review getOneReview(int id);
 }

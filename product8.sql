@@ -390,12 +390,18 @@ VALUES
 
 INSERT INTO Product
 VALUES
-(0, null, '내가 만든 키링', 0, 5000, 5000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 4, 'N', 2, 'jjanggu'),
-(0, null, '니가 만든 키링', 0, 5000, 5000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 3, 'N', 2, 'jjanggu'),
-(0, null, '김주원 키링', 0, 6000, 6000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 2, 'N', 2, 'jjanggu'),
+(0, null, '김주원 키링', 0, 5000, 5000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 4, 'N', 2, 'jjanggu'),
+(0, null, '박건우 키링', 0, 5000, 5000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 3, 'N', 2, 'jjanggu'),
+(0, null, '윤형준 키링', 0, 6000, 6000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 2, 'N', 2, 'ssafy2'),
 (0, null, '서호철 키링', 0, 6000, 6000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 1, 'N', 2, 'chulsu'),
 (0, null, '도태훈 키링', 0, 6000, 6000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 0, 'N', 2, 'chulsu'),
-(0, null, '박건우 키링', 0, 6000, 6000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 0, 'N', 2, 'chulsu')
+(0, null, '박대온 키링', 0, 6000, 6000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 0, 'N', 2, 'chulsu'),
+(0, null, '박민우 키링', 0, 5000, 5000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 4, 'N', 2, 'jjanggu'),
+(0, null, '손아섭 키링', 0, 5000, 5000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 1, 'N', 2, 'jjanggu'),
+(0, null, '오영수 키링', 0, 6000, 6000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 2, 'N', 2, 'ssafy2'),
+(0, null, '페디 키링', 0, 5000, 5000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 5, 'N', 2, 'jjanggu'),
+(0, null, '김형준 키링', 0, 5000, 5000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 3, 'N', 2, 'jjanggu'),
+(0, null, '권희동 키링', 0, 6000, 6000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 2, 'N', 2, 'ssafy2')
 ;
 
 INSERT INTO productSize
@@ -476,14 +482,19 @@ VALUES
 (0, 'ssafy1', 3, 149000, 'M(95)', '선수 열전사 마킹(+20,000원)', '서호철(5)', 2, now(), '철수', '01055557777', '일본', '도쿄', '빨리 주세여')
 ;
 
-SELECT *
-FROM Product;
 
 SELECT *
-FROM ProductOption
-WHERE productId = 1;
+FROM productheart;
 
-SELECT *
-FROM Product
+SELECT registId
+FROM product
+WHERE productType = 2
+GROUP BY registId
+ORDER BY SUM(orderCnt) DESC
+LIMIT 3;
+
+UPDATE Product
+SET `orderCnt` = orderCnt +1  
+WHERE productId = 27;
 
 

@@ -6,6 +6,9 @@ import com.ssafy.video.model.dto.ProductOrder;
 
 public interface OrderService {
 	
+	// 상품 구매량 증가
+	void updateOrderCnt(int productId);
+	
 	// 주문 내역 등록
 	void writeOrder(ProductOrder order);
 	

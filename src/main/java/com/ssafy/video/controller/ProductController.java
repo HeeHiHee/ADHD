@@ -37,6 +37,7 @@ public class ProductController extends HttpServlet {
 	
 	@Autowired
 	private ProductService pService;
+
 	
 	// 상품 등록
 	@ApiOperation("상품 등록")
@@ -129,7 +130,7 @@ public class ProductController extends HttpServlet {
 	}
 	
 	// 인기있는 자체제작 상품
-	@ApiOperation(value = "인기있는 자체제작 상품 리스트", notes = "자체제작 상품 중 구매량 높은 순 10개 조회")
+	@ApiOperation(value = "인기있는 자체제작 상품 리스트", notes = "자체제작 상품 중 구매량 높은 순 5개 조회")
 	@GetMapping("/bestHandmadeList")
 	public ResponseEntity<List<Product>> bestHandmadeList(){
 		List<Product> bestHandmadeList = pService.getHandmadebest();
