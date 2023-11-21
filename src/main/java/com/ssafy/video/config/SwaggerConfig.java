@@ -24,8 +24,8 @@ public class SwaggerConfig {
 	
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder()
-				.title("Mandarin")
-				.description("규리규리심규리.")
+				.title("ADHD")
+				.description("다히노스")
 				.version("0.1")
 				.build();
 	}

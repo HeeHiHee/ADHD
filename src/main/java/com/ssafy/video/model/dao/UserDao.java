@@ -6,11 +6,22 @@ import com.ssafy.video.model.dto.User;
 
 public interface UserDao {
 	
-	List<User> selectAll();
+	// 유저 한 명 조회
+	User getUserOne(String id);
 	
-	List<User> selectList(String id);
+	// 유저 닉네임 조회
+	User getUserNick(String nick);
 	
-	int insertUser(User user);
+	// 회원가입
+	void signup(User user);
 	
-	User selectOne(User user);
+	// 유저 정보 수정
+	void updateUser(User user);
+	
+	// 유저 탈퇴
+	void UserCancel(String id);
+	
+	// 유저 탈퇴
+	void UserBan(String id);
+
 }

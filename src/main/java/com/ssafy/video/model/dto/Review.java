@@ -3,80 +3,112 @@ package com.ssafy.video.model.dto;
 import java.util.Date;
 
 public class Review {
-	private String videoid;
-	private int reviewid;
-	private String title;
-	private String writer;
-	private String content;
-	private String regDate;
-	private int viewCnt;
 	
-	public Review() {}
+	private int reviewId;
+	private int productId;
+	private String userId;
+	private String type;
+	private String reviewTitle;
+	private String reviewDate;
+	private String reviewContent;
+	private int reviewStar;
+	private String reviewDelete;
 	
-	public Review(String videoid, String title, String writer, String content) {
-		this.videoid=videoid;
-		this.title=title;
-		this.writer=writer;
-		this.content=content;
+	public Review() {
 	}
 
-	public String getVideoid() {
-		return videoid;
+	public Review(int reviewId, int productId, String userId, String type, String reviewTitle, String reviewDate,
+			String reviewContent, int reviewStar, String reviewDelete) {
+		super();
+		this.reviewId = reviewId;
+		this.productId = productId;
+		this.userId = userId;
+		this.type = type;
+		this.reviewTitle = reviewTitle;
+		this.reviewDate = reviewDate;
+		this.reviewContent = reviewContent;
+		this.reviewStar = reviewStar;
+		this.reviewDelete = reviewDelete;
 	}
 
-	public void setVideoid(String videoid) {
-		this.videoid = videoid;
+	public int getReviewId() {
+		return reviewId;
 	}
 
-	public int getReviewid() {
-		return reviewid;
+	public void setReviewId(int reviewId) {
+		this.reviewId = reviewId;
 	}
 
-	public void setReviewid(int reviewid) {
-		this.reviewid = reviewid;
+	public int getProductId() {
+		return productId;
 	}
 
-	public String getTitle() {
-		return title;
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public String getUserId() {
+		return userId;
 	}
 
-	public String getWriter() {
-		return writer;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public String getType() {
+		return type;
 	}
 
-	public String getContent() {
-		return content;
+	public void setType(String type) {
+		this.type = type;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public String getReviewTitle() {
+		return reviewTitle;
 	}
 
-	public String getRegDate() {
-		return regDate;
+	public void setReviewTitle(String reviewTitle) {
+		this.reviewTitle = reviewTitle;
 	}
 
-	public void setRegDate(String regDate) {
-		this.regDate = regDate;
+	public String getReviewDate() {
+		return reviewDate;
 	}
 
-	public int getViewCnt() {
-		return viewCnt;
+	public void setReviewDate(String reviewDate) {
+		this.reviewDate = reviewDate;
 	}
 
-	public void setViewCnt(int viewCnt) {
-		this.viewCnt = viewCnt;
+	public String getReviewContent() {
+		return reviewContent;
 	}
 
-	
+	public void setReviewContent(String reviewContent) {
+		this.reviewContent = reviewContent;
+	}
+
+	public int getReviewStar() {
+		return reviewStar;
+	}
+
+	public void setReviewStar(int reviewStar) {
+		this.reviewStar = reviewStar;
+	}
+
+	public String getReviewDelete() {
+		return reviewDelete;
+	}
+
+	public void setReviewDelete(String reviewDelete) {
+		this.reviewDelete = reviewDelete;
+	}
+
+	@Override
+	public String toString() {
+		return "Review [reviewId=" + reviewId + ", productId=" + productId + ", userId=" + userId + ", type=" + type
+				+ ", reviewTitle=" + reviewTitle + ", reviewDate=" + reviewDate + ", reviewContent=" + reviewContent
+				+ ", reviewStar=" + reviewStar + ", reviewDelete=" + reviewDelete + "]";
+	}
 	
 	
 

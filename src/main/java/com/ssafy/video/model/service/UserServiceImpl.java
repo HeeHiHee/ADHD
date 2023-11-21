@@ -14,34 +14,48 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDao userDao;
 	
+	// 회원가입
+	@Override
+	public void signup(User user) {
+		userDao.signup(user);
+	}
+
+	// 로그인
+	@Override
+	public User login(String id) {
+		return userDao.getUserOne(id);
+	}
+
+	// 유저 한 명 조회
+	@Override
+	public User getUserOne(String id) {
+		return userDao.getUserOne(id);
+	}
 	
+	// 닉네임에 맞는 유저 조회
 	@Override
-	public List<User> getUserList() {
-		return userDao.selectAll();
+	public User getUserNick(String nick) {
+		return userDao.getUserNick(nick);
 	}
-
 	
-	//최영진 / 박소현 아주 훌륭 그자체
+	// 유저 정보 수정
 	@Override
-	public int signup(User user) {
-		return userDao.insertUser(user);
+	public void updateUser(User user) {
+		userDao.updateUser(user);		
 	}
-
-
+	
+	// 유저 탈퇴
 	@Override
-	public User login(User user) {
-		//DB 해당 ID만 넘겨서 데이터를 가지고 오고 가지고온 User 데이터와 내가 현재 가지고 있는 user의 비밀번호를 확인하면
-		User tmp = userDao.selectOne(user);
-		//tmp가 실제 User 정보 일수도 있고 / null 넘어왔다.
-		if(tmp != null && tmp.getPw().equals(user.getPw()))
-			return tmp;
-		return null;
+	public void UserCancel(String id) {
+		userDao.UserCancel(id);
+		
 	}
-
-
+	
+	// 유저 정지
 	@Override
-	public List<User> getSelectList(String id) {
-		return userDao.selectList(id);
+	public void UserBan(String id) {
+		userDao.UserBan(id);
+		
 	}
 
 }

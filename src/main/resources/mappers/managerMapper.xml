@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.video.model.dao.ManagerDao">
+
+	<!-- 전체 관리자 조회 -->
+	<select id="getManagerList" resultType="Manager">
+		SELECT *
+		FROM manager
+	</select>
+	
+	<!-- 관리자 등록 -->
+	<insert id="writeManager" parameterType="Manager">
+		INSERT INTO manager
+		VALUES(#{managerId}, #{managerPw}, #{managerName}, 'N')
+	</insert>
+	
+	<!-- 관리자 수정 -->
+	<update id="updateManager" parameterType="Manager">
+		UPDATE manager
+		SET managerPw = #{managerPw}, managerName = #{managerName}
+		WHERE managerId = #{managerId}
+	</update>
+	
+	<!-- 관리자 삭제 -->
+	<update id="removeManager" parameterType="String">
+		UPDATE manager
+		SET managerDelete = 'Y'
+		WHERE managerId = #{managerId}
+	</update>
+	
+	<!-- 관리자 댓글 등록 -->
+	<insert id="writeManagerComment" parameterType="ManagerComment">
+		INSERT INTO ManagerComment
+		VALUES
+		(0, #{managerId}, #{reviewId}, #{commentContent}, now(), 'N')
+	</insert>
+	
+	<!-- 관리자 아이디에 해당하는 댓글 리스트 가져오기 -->
+	<select id="getManagerCommentList" parameterType="String" resultType="ManagerComment">
+		SELECT *
+		FROM ManagerComment
+		WHERE managerId = #{managerId}
+	</select>
+	
+	<!-- 댓글 아이디에 맞는 관리자 댓글 리스트 조회 -->
+	<select id="getManagerCommentIdList" parameterType="int" resultType="ManagerComment">
+		SELECT *
+		FROM ManagerComment
+		WHERE reviewId = #{reviewId}
+	</select>
+	
+	<!-- 관리자 댓글 수정 -->
+	<update id="updateManagerComment" parameterType="ManagerComment">
+		UPDATE ManagerComment
+		SET managerId = #{managerId}, reviewId = #{reviewId}, commentContent = #{commentContent}, commentDate = now()
+		WHERE commentId = #{commentId}
+	</update>
+	
+	<!-- 댓글 아이디에 맞는 관리자 댓글 하나 삭제 -->
+	<update id="removeManagerComment" parameterType="int">
+		UPDATE ManagerComment
+		SET commentDelete = 'Y'
+		WHERE commentId = #{commentId}
+	</update>
+	
+	<!-- 공지사항 등록 -->
+	<insert id="writeManagerNotice" parameterType="ManagerNotice">
+		INSERT INTO ManagerNotice
+		VALUES
+		(0, #{managerId}, #{noticeType}, #{noticeTitle}, #{noticeContent}, #{noticeWriter}, #{noticeImg}, 0, now(), 'N')
+	</insert>
+	
+	<!-- 공지사항 전체 리스트 -->
+	<select id="getManagerNoticeList" resultType="ManagerNotice">
+		SELECT *
+		FROM ManagerNotice
+		WHERE noticeDelete = 'N' AND noticeType = 'N'
+	</select>
+	
+	<!-- 이벤트 전체 리스트 -->
+	<select id="getManagerEventList" resultType="ManagerNotice">
+		SELECT *
+		FROM ManagerNotice
+		WHERE noticeDelete = 'N' AND noticeType = 'E'
+	</select>
+	
+	<!-- 관리자 마다의 공지사항 리스트 -->
+	<select id="getManagerNotice" parameterType="String" resultType="ManagerNotice">
+		SELECT *
+		FROM ManagerNotice
+		WHERE managerId = #{managerId}
+	</select>
+	
+	<!-- 공지사항 수정 -->
+	<update id="updateManagerNotice" parameterType="ManagerNotice">
+		UPDATE ManagerNotice
+		SET managerId = #{managerId}, noticeType = #{noticeType}, noticeTitle = #{noticeTitle}, noticeContent = #{noticeContent},
+			noticeWriter = #{noticeWriter}, noticeImg = #{noticeImg}, noticeDate = now()
+		WHERE noticeId = #{noticeId}
+	</update>
+	
+	<!-- 공지사항 삭제 -->
+	<update id="removeManagerNotice" parameterType="int">
+		UPDATE ManagerNotice
+		SET noticeDelete = 'Y'
+		WHERE noticeId = #{noticeId}
+	</update>
+	
+	<!-- 공지사항 상세 조회 -->
+	<select id="getOneManagerNotice" resultType="ManagerNotice" parameterType="int">
+		SELECT *
+		FROM ManagerNotice
+		WHERE noticeId = #{noticeId}
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="updateViewCnt" parameterType="int">
+		update ManagerNotice
+		set `noticeViews` = noticeViews +1  
+		where noticeId = #{noticeId}
+	</update>
+	
+	
+	
+</mapper>

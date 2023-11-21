@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.video.model.dao.VideoDao">
+
+
+	<!-- 전체글 조회 -->
+	<select id="selectAll" resultType="Video">
+		SELECT *
+		FROM video ORDER BY viewCnt DESC;
+	</select>
+
+	<!-- 상세글 조회 -->
+	<select id="selectPart" resultType="Video" parameterType="String">
+		SELECT *
+		FROM video
+		WHERE fitPartName LIKE CONCAT ('%' ,#{fitPartName}, '%') ORDER BY viewCnt DESC;
+	</select>
+
+	<!-- 조회수 증가 -->
+	<update id="updateViewCnt" parameterType="String">
+		UPDATE video
+		SET `viewCnt` = viewCnt+1
+		WHERE id = #{id};
+	</update>
+	
+	<select id="selectOne" parameterType="String" resultType="Video">
+	SELECT * FROM video WHERE id = #{id};
+	</select>
+	
+
+
+</mapper>
