@@ -37,7 +37,7 @@
 	<!-- 게시글 등록 -->
 	<insert id="writeReview" parameterType="Review" keyProperty="reviewid" useGeneratedKeys="true">
 		INSERT INTO Review
-		VALUES (0, #{reviewId}, #{productId}, #{userId}, #{type}, #{reviewTitle}, #{reviewDate}, #{reviewContent}, #{reviewStar}, 'N')
+		VALUES (0, #{productId}, #{userId}, #{type}, #{reviewTitle}, #{reviewDate}, #{reviewContent}, #{reviewStar}, 'N')
 	</insert>
 	
 	<!-- 게시글 삭제 -->
