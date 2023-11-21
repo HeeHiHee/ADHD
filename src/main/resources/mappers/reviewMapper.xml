@@ -54,8 +54,7 @@
 	<!-- 등록날짜 / 최근 조회날짜 / 수정 날짜 .... -->
 	<update id="updateReview" parameterType="Review">
 		UPDATE review
-		SET reviewId = #{reviewId},
-			productId = #{productId},
+		SET	productId = #{productId},
 			userId = #{userId},
 			type = #{type},
 			reviewTitle = #{reviewTitle},
