@@ -88,7 +88,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `adhd`.`product` (
   `productId` INT NOT NULL AUTO_INCREMENT,
-  `categoryId` INT NOT NULL,
+  `categoryId` INT NULL,
   `productName` VARCHAR(45) NOT NULL,
   `cost` INT NOT NULL,
   `price` INT NOT NULL,
@@ -99,6 +99,8 @@ CREATE TABLE IF NOT EXISTS `adhd`.`product` (
   `regDate` TIMESTAMP NOT NULL,
   `orderCnt` VARCHAR(45) NOT NULL,
   `productDelete` VARCHAR(10) NOT NULL,
+  `productType` INT NOT NULL,
+  `registId` VARCHAR(45) NULL,
   PRIMARY KEY (`productId`),
   UNIQUE INDEX `productId_UNIQUE` (`productId` ASC) VISIBLE,
   INDEX `fk_product_productcategory_idx` (`categoryId` ASC) VISIBLE,
@@ -330,6 +332,14 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
+INSERT INTO User
+VALUES
+('ssafy1', '1234', '최싸피', '01012345678', 'ssafy1@ssafy.com', '췍췍', true, 'Y'),
+('ssafy2', '5678', '이싸피', '01056781234', 'ssafy2@ssafy.com', '잉잉', false, 'Y'),
+('jjanggu', '5555', '신짱구', '01056781234', 'ssafy2@ssafy.com', '짱구', false, 'Y'),
+('chulsu', '7777', '김철수', '01056781234', 'ssafy2@ssafy.com', '철수', false, 'Y')
+;
+
 INSERT INTO ProductCategory
 VALUES
 (0, '유니폼', 1, 0),
@@ -353,29 +363,39 @@ VALUES
 
 INSERT INTO Product
 VALUES
-(0, 5, '2023 어센틱 민트 유니폼', 0, 144000, 144000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/70321261-3527-41c8-8377-1ab2b48f64f520230716.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/09bae4bd-afcc-4e45-96f7-599f16326a6c20230716.jpg', false, "2023-10-11", 5, 'N'),
-(0, 5, '2023 어센틱 도구리 유니폼', 0, 149000, 149000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/791f7ade-bdcd-46b9-ad3b-1ca459c5f27520230515.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/492a05c0-5367-4f9f-9a95-d4b1fc5b424b20230516.jpg', false, "2023-11-11", 8, 'N'),
-(0, 6, '클러치 퍼즈업 유니폼', 0, 135000, 135000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/a08c1a19-9ed2-43fe-befb-a352baaf0b7420230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/11cc3654-46b2-44d4-89f9-45d6c6d913f520230906.jpg', false, "2023-10-10", 9, 'N'),
-(0, 6, '클러치 원정 유니폼', 0, 89000, 89000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/a7aa3b9b-cb69-4c6a-85f3-00c8155f547120230814.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/7cef3e4b-24e6-4a3e-928e-a534bac0fabd20230814.jpg', false, "2023-11-10", 1, 'N'),
-(0, 7, '레플리카 원정 유니폼', 0, 59000, 59000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/dddf465e-d272-470e-979a-5e0ab6cff92220230407.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/d8546c36-34b0-4b0e-ae7b-52ca16977c0420230407.jpg', false, "2023-10-9", 2, 'N'),
-(0, 7, '레플리카 홈 유니폼', 0, 59000, 59000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b9865dc0-cda0-4fd2-976a-6365a0e0f70220230407.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/0deb1328-01b6-4f5c-b7d7-4beb780173d820230407.jpg', false, "2023-11-9", 0, 'N'),
-(0, 8, '2023 포스트시즌 기념 열접착 패치', 0, 9000, 9000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/d0f6a1ef-f5d2-4496-b325-ee14a67fa74520231015.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/42a18b84-d4d8-4ec0-96b3-3e297a0ea81d20231015.jpg', false, "2023-10-8", 0, 'N'),
-(0, 8, '이용찬 150세이브 기념 열접착 패치', 0, 9000, 9000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b4ecf25b-c024-4912-b9d4-57d74d24081020230910.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/af33a5a0-3e41-43e6-af53-c32718bc497120230923.jpg', false, "2023-11-8", 6, 'N'),
-(0, 9, '2023 어센틱 민트 모자', 0, 42000, 42000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/f6b2e24a-effb-4120-98de-7c85842420a320230716.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/d6631328-d795-4826-bbf6-58382b57faf120230717.jpg', false, "2023-10-7", 0, 'N'),
-(0, 9, '2023 어센틱 태극기 모자', 0, 42000, 42000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/856e921c-c074-40eb-aea1-3744c33ec24f20230716.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/3a792f88-f39b-4f16-a30d-aad8d0c4213320230717.jpg', false, "2023-11-7", 0, 'N'),
-(0, 10, '클러치 퍼즈업 모자', 0, 33000, 33000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/d85fa992-11ba-4e2e-b5c6-8d09990d876e20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/ef3f1221-2ac0-4ab8-8b33-55544a8b7c5f20230905.jpg', false, "2023-11-6", 0, 'N'),
-(0, 10, '클러치 민트 모자', 0, 33000, 33000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/51aa4458-09e0-4031-9c8d-29dc5cc0a77220230801.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/da33ddff-503c-4364-8116-d98cbbb9e39620230801.jpg', false, "2023-10-6", 0, 'N'),
-(0, 12, '2023 어센틱 동계점퍼', 0, 193500, 193500, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/29d104ae-ca94-4a67-bf32-ff2f270493a420230328.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/a8457e09-77df-47d6-af20-e202a415be9f20230327.jpg', false, "2023-11-5", 4, 'N'),
-(0, 12, '2023 어센틱 후드티셔츠', 0, 119000, 119000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/1113361e-04d1-46d6-8ab0-37a818e11ad620230317.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/2e9c134e-6285-4e7f-abcc-4e39418b4bb020230318.jpg', false, "2023-10-5", 3, 'N'),
-(0, 13, '2023 클러치 춘추점퍼', 0, 140000, 140000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/e97f660c-abc7-46c2-b12d-17f0226f2c9220230327.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b2997767-f98b-4bc7-90d1-326a94492cb520230327.jpg', false, "2023-11-5", 2, 'N'),
-(0, 14, '스카이블루 단꿀 잠옷세트', 0, 49800, 49800, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/d0538597-fe8d-4d2a-a19f-f8b4141372c420221020.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/03a236bb-302b-45e1-92c0-fbcf753e543520221020.jpg', false, "2023-11-4", 1, 'N'),
-(0, 14, '아이보리 단꿀 잠옷세트', 0, 49800, 49800, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/d3a2e2fe-6648-4415-9cf4-c847f03c4fe820221024.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/13d42b24-9716-4c71-93fd-ed7e80ff7d7820221020.jpg', false, "2023-10-4", 0, 'N'),
-(0, 15, '민트 응원 타올', 0, 9000, 9000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/cae3ce66-42c8-4c10-8096-b516b726d29820231023.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/5439f3bb-6712-4ceb-94c6-9f0e64148c8f20231023.jpg', false, "2023-10-3", 0, 'N'),
-(0, 15, '민트 플라스틱 응원배트', 0, 6000, 6000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/3388bdc5-4209-46b7-9b81-a419536250ba20230625.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/eb27ae9e-d3ec-41a2-8515-1d69fca54e1a20230625.jpg', false, "2023-11-3", 0, 'N'),
-(0, 16, '2023 포스트시즌 기념구', 0, 15000, 15000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/8ce56aea-2360-4ea7-b37c-7a66c6db617820231015.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/d4c0c971-f583-4dab-be92-aa390db92f0c20231015.jpg', false, "2023-11-2", 0, 'N'),
-(0, 16, '2024 드래프트 기념구', 0, 15000, 15000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/7c623185-e95a-4b5c-ae9e-febc526e91cf20231007.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/a058fedc-f24e-4819-a7a3-86ddf27292b920231007.jpg', false, "2023-10-2", 0, 'N'),
-(0, 17, '2023 포스트시즌 기념 아크릴 키링', 0, 7000, 7000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/3c84a33f-d01d-49a9-a6af-eabffeebc4a020231015.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/8a93a5bf-b5a3-4783-8945-7e124259365a20231015.jpg', false, "2023-10-1", 0, 'N'),
-(0, 17, '퍼즈업 아크릴 키링', 0, 7000, 7000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, "2023-10-1", 0, 'N')
+(0, 5, '2023 어센틱 민트 유니폼', 0, 144000, 144000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/70321261-3527-41c8-8377-1ab2b48f64f520230716.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/09bae4bd-afcc-4e45-96f7-599f16326a6c20230716.jpg', false, "2023-10-11", 5, 'N', 1, ''),
+(0, 5, '2023 어센틱 도구리 유니폼', 0, 149000, 149000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/791f7ade-bdcd-46b9-ad3b-1ca459c5f27520230515.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/492a05c0-5367-4f9f-9a95-d4b1fc5b424b20230516.jpg', false, "2023-11-11", 8, 'N', 1, ''),
+(0, 6, '클러치 퍼즈업 유니폼', 0, 135000, 135000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/a08c1a19-9ed2-43fe-befb-a352baaf0b7420230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/11cc3654-46b2-44d4-89f9-45d6c6d913f520230906.jpg', false, "2023-10-10", 9, 'N', 1, ''),
+(0, 6, '클러치 원정 유니폼', 0, 89000, 89000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/a7aa3b9b-cb69-4c6a-85f3-00c8155f547120230814.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/7cef3e4b-24e6-4a3e-928e-a534bac0fabd20230814.jpg', false, "2023-11-10", 1, 'N', 1, ''),
+(0, 7, '레플리카 원정 유니폼', 0, 59000, 59000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/dddf465e-d272-470e-979a-5e0ab6cff92220230407.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/d8546c36-34b0-4b0e-ae7b-52ca16977c0420230407.jpg', false, "2023-10-9", 2, 'N', 1, ''),
+(0, 7, '레플리카 홈 유니폼', 0, 59000, 59000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b9865dc0-cda0-4fd2-976a-6365a0e0f70220230407.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/0deb1328-01b6-4f5c-b7d7-4beb780173d820230407.jpg', false, "2023-11-9", 0, 'N', 1, ''),
+(0, 8, '2023 포스트시즌 기념 열접착 패치', 0, 9000, 9000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/d0f6a1ef-f5d2-4496-b325-ee14a67fa74520231015.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/42a18b84-d4d8-4ec0-96b3-3e297a0ea81d20231015.jpg', false, "2023-10-8", 0, 'N', 1, ''),
+(0, 8, '이용찬 150세이브 기념 열접착 패치', 0, 9000, 9000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b4ecf25b-c024-4912-b9d4-57d74d24081020230910.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/af33a5a0-3e41-43e6-af53-c32718bc497120230923.jpg', false, "2023-11-8", 6, 'N', 1, ''),
+(0, 9, '2023 어센틱 민트 모자', 0, 42000, 42000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/f6b2e24a-effb-4120-98de-7c85842420a320230716.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/d6631328-d795-4826-bbf6-58382b57faf120230717.jpg', false, "2023-10-7", 0, 'N', 1, ''),
+(0, 9, '2023 어센틱 태극기 모자', 0, 42000, 42000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/856e921c-c074-40eb-aea1-3744c33ec24f20230716.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/3a792f88-f39b-4f16-a30d-aad8d0c4213320230717.jpg', false, "2023-11-7", 0, 'N', 1, ''),
+(0, 10, '클러치 퍼즈업 모자', 0, 33000, 33000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/d85fa992-11ba-4e2e-b5c6-8d09990d876e20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/ef3f1221-2ac0-4ab8-8b33-55544a8b7c5f20230905.jpg', false, "2023-11-6", 0, 'N', 1, ''),
+(0, 10, '클러치 민트 모자', 0, 33000, 33000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/51aa4458-09e0-4031-9c8d-29dc5cc0a77220230801.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/da33ddff-503c-4364-8116-d98cbbb9e39620230801.jpg', false, "2023-10-6", 0, 'N', 1, ''),
+(0, 12, '2023 어센틱 동계점퍼', 0, 193500, 193500, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/29d104ae-ca94-4a67-bf32-ff2f270493a420230328.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/a8457e09-77df-47d6-af20-e202a415be9f20230327.jpg', false, "2023-11-5", 4, 'N', 1, ''),
+(0, 12, '2023 어센틱 후드티셔츠', 0, 119000, 119000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/1113361e-04d1-46d6-8ab0-37a818e11ad620230317.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/2e9c134e-6285-4e7f-abcc-4e39418b4bb020230318.jpg', false, "2023-10-5", 3, 'N', 1, ''),
+(0, 13, '2023 클러치 춘추점퍼', 0, 140000, 140000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/e97f660c-abc7-46c2-b12d-17f0226f2c9220230327.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b2997767-f98b-4bc7-90d1-326a94492cb520230327.jpg', false, "2023-11-5", 2, 'N', 1, ''),
+(0, 14, '스카이블루 단꿀 잠옷세트', 0, 49800, 49800, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/d0538597-fe8d-4d2a-a19f-f8b4141372c420221020.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/03a236bb-302b-45e1-92c0-fbcf753e543520221020.jpg', false, "2023-11-4", 1, 'N', 1, ''),
+(0, 14, '아이보리 단꿀 잠옷세트', 0, 49800, 49800, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/d3a2e2fe-6648-4415-9cf4-c847f03c4fe820221024.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/13d42b24-9716-4c71-93fd-ed7e80ff7d7820221020.jpg', false, "2023-10-4", 0, 'N', 1, ''),
+(0, 15, '민트 응원 타올', 0, 9000, 9000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/cae3ce66-42c8-4c10-8096-b516b726d29820231023.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/5439f3bb-6712-4ceb-94c6-9f0e64148c8f20231023.jpg', false, "2023-10-3", 0, 'N', 1, ''),
+(0, 15, '민트 플라스틱 응원배트', 0, 6000, 6000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/3388bdc5-4209-46b7-9b81-a419536250ba20230625.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/eb27ae9e-d3ec-41a2-8515-1d69fca54e1a20230625.jpg', false, "2023-11-3", 0, 'N', 1, ''),
+(0, 16, '2023 포스트시즌 기념구', 0, 15000, 15000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/8ce56aea-2360-4ea7-b37c-7a66c6db617820231015.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/d4c0c971-f583-4dab-be92-aa390db92f0c20231015.jpg', false, "2023-11-2", 0, 'N', 1, ''),
+(0, 16, '2024 드래프트 기념구', 0, 15000, 15000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/7c623185-e95a-4b5c-ae9e-febc526e91cf20231007.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/a058fedc-f24e-4819-a7a3-86ddf27292b920231007.jpg', false, "2023-10-2", 0, 'N', 1, ''),
+(0, 17, '2023 포스트시즌 기념 아크릴 키링', 0, 7000, 7000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/3c84a33f-d01d-49a9-a6af-eabffeebc4a020231015.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/8a93a5bf-b5a3-4783-8945-7e124259365a20231015.jpg', false, "2023-10-1", 0, 'N', 1, ''),
+(0, 17, '퍼즈업 아크릴 키링', 0, 7000, 7000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, "2023-10-1", 0, 'N', 1, '')
+;
+
+INSERT INTO Product
+VALUES
+(0, null, '내가 만든 키링', 0, 5000, 5000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 4, 'N', 2, 'jjanggu'),
+(0, null, '니가 만든 키링', 0, 5000, 5000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 3, 'N', 2, 'jjanggu'),
+(0, null, '김주원 키링', 0, 6000, 6000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 2, 'N', 2, 'jjanggu'),
+(0, null, '서호철 키링', 0, 6000, 6000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 1, 'N', 2, 'chulsu'),
+(0, null, '도태훈 키링', 0, 6000, 6000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 0, 'N', 2, 'chulsu'),
+(0, null, '박건우 키링', 0, 6000, 6000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 0, 'N', 2, 'chulsu')
 ;
 
 INSERT INTO productSize
@@ -395,12 +415,6 @@ VALUES
 (0, 15, '5'), (0, 15, '7'), (0, 15, '9'), (0, 15, 'XS(85)'), (0, 15, 'S(90)'), (0, 15, 'M(95)'), (0, 15, 'L(100)'), (0, 15, 'XL(105)'), (0, 15, '2XL(110)'), (0, 15, '4XL(120)'),
 (0, 16, 'M(95)'), (0, 16, 'L(100)'), (0, 16, 'XL(105)'), (0, 16, '2XL(110)'), (0, 16, '4XL(120)'), (0, 16, '5-6'), (0, 16, '7-8'), (0, 16, '9-10'), (0, 16, '11-12'), (0, 16, '13-14'),
 (0, 17, 'M(95)'), (0, 17, 'L(100)'), (0, 17, 'XL(105)'), (0, 17, '2XL(110)'), (0, 17, '4XL(120)'), (0, 17, '5-6'), (0, 17, '7-8'), (0, 17, '9-10'), (0, 17, '11-12'), (0, 17, '13-14')
-;
-
-INSERT INTO User
-VALUES
-('ssafy1', '1234', '최싸피', '01012345678', 'ssafy1@ssafy.com', '췍췍', true, 'Y'),
-('ssafy2', '5678', '이싸피', '01056781234', 'ssafy2@ssafy.com', '잉잉', false, 'Y')
 ;
 
 INSERT INTO productOption
@@ -457,10 +471,19 @@ VALUES
 (0, 'chulsu', 2, '환불 안내해드리겠습니다', '2023-11-20', 'N')
 ;
 
-SELECT *
-FROM managercomment;
-
 INSERT INTO productorder
 VALUES
 (0, 'ssafy1', 3, 149000, 'M(95)', '선수 열전사 마킹(+20,000원)', '서호철(5)', 2, now(), '철수', '01055557777', '일본', '도쿄', '빨리 주세여')
 ;
+
+SELECT *
+FROM Product;
+
+SELECT *
+FROM ProductOption
+WHERE productId = 1;
+
+SELECT *
+FROM Product
+
+

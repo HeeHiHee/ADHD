@@ -22,7 +22,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/heart")
 @Api(tags = "찜 상품 컨트롤러")
 public class ProductHeartController extends HttpServlet {
 	
@@ -36,7 +36,7 @@ public class ProductHeartController extends HttpServlet {
 	
 	// 찜 상품 등록
 	@ApiOperation("찜 상품 등록")
-	@PostMapping("/heart")
+	@PostMapping("")
 	public ResponseEntity<ProductHeart> heartWrite(@RequestBody ProductHeart productHeart){
 		hService.writeHeart(productHeart);
 		return new ResponseEntity<ProductHeart>(productHeart, HttpStatus.OK);
@@ -44,7 +44,7 @@ public class ProductHeartController extends HttpServlet {
 	
 	// 유저 아이디에 해당하는 찜 상품 리스트
 	@ApiOperation("유저 아이디에 해당하는 찜 상품 리스트")
-	@GetMapping("/heart/list/{id}")
+	@GetMapping("/list/{id}")
 	public ResponseEntity<List<ProductHeart>> heartList(@PathVariable String id){
 		List<ProductHeart> heartList =  hService.getHeartList(id);
 		return new ResponseEntity<List<ProductHeart>>(heartList, HttpStatus.OK);
@@ -52,7 +52,7 @@ public class ProductHeartController extends HttpServlet {
 	
 	// 찜 상품 아이디에 해당하는 찜 상품 하나만 조회
 	@ApiOperation("찜 상품(heartId) 아이디에 해당하는 찜 상품 하나만 조회")
-	@GetMapping("/heart/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<ProductHeart> heartListOne(@PathVariable int id){
 		ProductHeart productHeart = hService.getProductHeartOne(id);
 		return new ResponseEntity<ProductHeart>(productHeart, HttpStatus.OK);		
@@ -60,7 +60,7 @@ public class ProductHeartController extends HttpServlet {
 	
 	// 찜 상품 아이디에 해당하는 찜 상품 삭제
 	@ApiOperation("찜 상품(heartId) 아이디에 해당하는 찜 상품 삭제")
-	@DeleteMapping("/heart/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> ProductHeartRemove(@PathVariable int id){
 		hService.removeProductHeart(id);
 		return new ResponseEntity<Void>(HttpStatus.OK);		

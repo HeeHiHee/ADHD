@@ -14,12 +14,14 @@ public class Product {
 	private String regDate;
 	private int orderCnt;
 	private String productDelete;
+	private int productType;
+	private String registId;
 	
 	public Product() {
 	}
 	
 	public Product(int productId, int categoryId, String productName, int cost, int price, int profit,
-			String productImg, String productInfoImg, boolean soldOut, String regDate, int orderCnt, String productDelete) {
+			String productImg, String productInfoImg, boolean soldOut, String regDate, int orderCnt, String productDelete, int productType, String registId) {
 		super();
 		this.productId = productId;
 		this.categoryId = categoryId;
@@ -33,6 +35,8 @@ public class Product {
 		this.regDate = regDate;
 		this.orderCnt = orderCnt;
 		this.productDelete = productDelete;
+		this.productType = productType;
+		this.registId = registId;
 	}
 
 	public int getProductId() {
@@ -131,14 +135,30 @@ public class Product {
 		this.productDelete = productDelete;
 	}
 
+	public int getProductType() {
+		return productType;
+	}
+
+	public void setProductType(int productType) {
+		this.productType = productType;
+	}
+
+	public String getRegistId() {
+		return registId;
+	}
+
+	public void setRegistId(String registId) {
+		this.registId = registId;
+	}
+
 	@Override
 	public String toString() {
 		return "Product [productId=" + productId + ", categoryId=" + categoryId + ", productName=" + productName
 				+ ", cost=" + cost + ", price=" + price + ", profit=" + profit + ", productImg=" + productImg
 				+ ", productInfoImg=" + productInfoImg + ", soldOut=" + soldOut + ", regDate=" + regDate + ", orderCnt="
-				+ orderCnt + ", productDelete=" + productDelete + "]";
+				+ orderCnt + ", productDelete=" + productDelete + ", productType=" + productType + ", registId="
+				+ registId + "]";
 	}
-
 	
 
 }

@@ -24,7 +24,7 @@ import io.swagger.annotations.ApiOperation;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/review")
 @Api(tags = "리뷰 컨트롤러")
 public class ReviewController extends HttpServlet{
 	/**
@@ -40,7 +40,7 @@ public class ReviewController extends HttpServlet{
 	
 	// 리뷰 번호에 해당하는 리뷰 삭제
 	@ApiOperation("리뷰/문의 번호에 해당하는 리뷰/문의 삭제")
-	@PutMapping("/review/{id}")
+	@PutMapping("/{id}")
 	public ResponseEntity<Void> reviewRemove(@PathVariable int id){
 		rService.removeReview(id);
 		mService.removeManagerComment(id);
@@ -49,7 +49,7 @@ public class ReviewController extends HttpServlet{
 
 	// 리뷰 수정
 	@ApiOperation("리뷰/문의 수정")
-	@PutMapping("/review/update")
+	@PutMapping("/update")
 	public ResponseEntity<Void> reviewUpdate(@RequestBody Review review){		
 		rService.updateReview(review);		
 		return new ResponseEntity<Void>(HttpStatus.OK);	
@@ -63,7 +63,7 @@ public class ReviewController extends HttpServlet{
 	
 	// 리뷰 등록
 	@ApiOperation("리뷰/문의 등록")
-	@PostMapping("/review")
+	@PostMapping("")
 	public ResponseEntity<Review> ReviewWrite(@RequestBody Review review){
 		rService.writeReview(review);
 		return new ResponseEntity<Review>(review, HttpStatus.OK);

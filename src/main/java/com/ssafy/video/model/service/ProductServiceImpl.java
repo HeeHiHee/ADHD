@@ -6,9 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.video.model.dao.ProductDao;
+import com.ssafy.video.model.dto.Player;
 import com.ssafy.video.model.dto.Product;
 import com.ssafy.video.model.dto.ProductHeart;
+import com.ssafy.video.model.dto.ProductOption;
 import com.ssafy.video.model.dto.ProductShoppingBasket;
+import com.ssafy.video.model.dto.ProductSize;
+import com.ssafy.video.model.dto.User;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -60,6 +64,48 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<Product> getLatelyProduct() {
 		return dao.getLatelyProduct();
+	}
+	
+	// 상품 아이디에 해당하는 사이즈 조회
+	@Override
+	public List<ProductSize> getProductSize(int id) {
+		return dao.getProductSize(id);
+	}
+	
+	// 상품 아이디에 해당하는 옵션 조회
+	@Override
+	public List<ProductOption> getProductOption(int id) {
+		return dao.getProductOption(id);
+	}
+	
+	// 선수 리스트 조회
+	@Override
+	public List<Player> getPlayerList() {
+		return dao.getPlayerList();
+	}
+
+	// 자체제작 상품 전체 리스트
+	@Override
+	public List<Product> getHandmade() {
+		return dao.getHandmade();
+	}
+
+	// 인기있는 자체제작 상품
+	@Override
+	public List<Product> getHandmadebest() {
+		return dao.getHandmadebest();
+	}
+
+	// 인기있는 판매자 리스트 3명
+	@Override
+	public List<User> getSellerbest() {
+		return dao.getSellerbest();
+	}
+
+	// 인기있는 판매자 상품 리스트
+	@Override
+	public List<Product> getSellerHandmadebest(String registId) {
+		return dao.getSellerHandmadebest(registId);
 	}
 
 	

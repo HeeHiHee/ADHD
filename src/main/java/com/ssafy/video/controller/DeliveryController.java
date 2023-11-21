@@ -24,7 +24,7 @@ import io.swagger.annotations.ApiOperation;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/delivery")
 @Api(tags = "상품 배송 컨트롤러")
 public class DeliveryController extends HttpServlet {
 	

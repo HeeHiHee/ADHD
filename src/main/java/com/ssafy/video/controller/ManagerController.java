@@ -25,7 +25,7 @@ import io.swagger.annotations.ApiOperation;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/manager")
 @Api(tags = "관리자 컨트롤러")
 public class ManagerController extends HttpServlet{
 	/**
@@ -38,7 +38,7 @@ public class ManagerController extends HttpServlet{
 	
 	// 관리자 삭제
 	@ApiOperation("관리자 삭제")
-	@PutMapping("/manager/{id}")
+	@PutMapping("/{id}")
 	public ResponseEntity<Void> managerRemove(@PathVariable String id){
 		mService.removeManager(id);
 		return new ResponseEntity<Void>(HttpStatus.OK);
@@ -46,7 +46,7 @@ public class ManagerController extends HttpServlet{
 
 	// 관리자 수정
 	@ApiOperation("관리자 수정")
-	@PutMapping("/manager/update")
+	@PutMapping("/update")
 	public ResponseEntity<Void> managerUpdate(@RequestBody Manager manager){		
 		mService.updateManager(manager);		
 		return new ResponseEntity<Void>(HttpStatus.OK);		
@@ -54,7 +54,7 @@ public class ManagerController extends HttpServlet{
 	
 	// 관리자 등록
 	@ApiOperation("관리자 등록")
-	@PostMapping("/manager")
+	@PostMapping("")
 	public ResponseEntity<Manager> managerWrite(@RequestBody Manager manager){
 		mService.writeManager(manager);
 		return new ResponseEntity<Manager>(manager, HttpStatus.OK);
@@ -83,7 +83,7 @@ public class ManagerController extends HttpServlet{
 	
 	// 관리자 아이디에 해당하는 댓글 리스트 가져오기
 	@ApiOperation(value = "관리자 댓글 리스트 조회", notes = "관리자 아이디에 해당하는 댓글 리스트 가져오기")
-	@GetMapping("/managercommentlist")
+	@GetMapping("/managercomment/list")
 	public ResponseEntity<List<ManagerComment>> managerCommentList(String managerId){
 		List<ManagerComment> managerCommentList = mService.getManagerCommentList(managerId);
 		return new ResponseEntity<List<ManagerComment>>(managerCommentList,HttpStatus.OK);		
@@ -91,7 +91,7 @@ public class ManagerController extends HttpServlet{
 	
 	// 댓글 아이디에 맞는 관리자 댓글 리스트 조회
 	@ApiOperation(value = "댓글 아이디에 맞는 관리자 댓글 리스트 조회", notes = "댓글 아이디에 맞는 관리자 댓글 리스트 조회")
-	@GetMapping("/managercommentidlist")
+	@GetMapping("/managercomment/idlist")
 	public ResponseEntity<List<ManagerComment>> managerCommentIdList(int reviewId){
 		List<ManagerComment> managerCommentIdList = mService.getManagerCommentIdList(reviewId);
 		return new ResponseEntity<List<ManagerComment>>(managerCommentIdList,HttpStatus.OK);		
@@ -127,7 +127,7 @@ public class ManagerController extends HttpServlet{
 	
 	// 공지사항 전체 리스트
 	@ApiOperation(value = "공지사항 전체 리스트", notes = "얘는 삭제된 공지사항은 안 뜸")
-	@GetMapping("/managerNoticeList")
+	@GetMapping("/managerNotice/List")
 	public ResponseEntity<List<ManagerNotice>> managerNoticeList(){
 		List<ManagerNotice> managerNoticeList = mService.getManagerNoticeList();
 		return new ResponseEntity<List<ManagerNotice>>(managerNoticeList,HttpStatus.OK);		
@@ -135,7 +135,7 @@ public class ManagerController extends HttpServlet{
 	
 	// 이벤트 전체 리스트
 	@ApiOperation(value = "이벤트 전체 리스트", notes = "얘는 삭제된 이벤트는 안 뜸")
-	@GetMapping("/managerEventList")
+	@GetMapping("/managerEvent/List")
 	public ResponseEntity<List<ManagerNotice>> managerEventList(){
 		List<ManagerNotice> managerEventList = mService.getManagerEventList();
 		return new ResponseEntity<List<ManagerNotice>>(managerEventList,HttpStatus.OK);		

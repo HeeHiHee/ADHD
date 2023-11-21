@@ -22,7 +22,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/order")
 @Api(tags = "주문 컨트롤러")
 public class OrderController extends HttpServlet{
 	/**
@@ -35,7 +35,7 @@ public class OrderController extends HttpServlet{
 	
 	// 주문 내역 등록
 	@ApiOperation(value = "주문 내역 등록", notes = "주문이 완료된 내역들을 db에 저장")
-	@PostMapping("/order")
+	@PostMapping("")
 	public ResponseEntity<?> OrderWrite(@RequestBody List<ProductOrder> orderList){
 		for(ProductOrder order : orderList) {
 			oService.writeOrder(order);
@@ -45,7 +45,7 @@ public class OrderController extends HttpServlet{
 	
 	// 리뷰 리스트 조회
 	@ApiOperation(value = "주문 내역 전체 조회", notes = "모든 주문 내역을 조회함")
-	@GetMapping("/orderList")
+	@GetMapping("/List")
 	public ResponseEntity<List<ProductOrder>> OrderList(){
 		List<ProductOrder> orderList = oService.getOrderList();
 		return new ResponseEntity<List<ProductOrder>>(orderList,HttpStatus.OK);		
@@ -53,7 +53,7 @@ public class OrderController extends HttpServlet{
 	
 	// 유저 아이디에 맞는 주문 내역 조회
 	@ApiOperation(value = "해당 유저 주문 내역 조회", notes = "유저 아이디에 맞는 주문 내역 조회")
-	@GetMapping("/orderUserList")
+	@GetMapping("/UserList")
 	public ResponseEntity<List<ProductOrder>> OrderUserList(String userId){
 		List<ProductOrder> orderUserList = oService.getOrderUserList(userId);
 		return new ResponseEntity<List<ProductOrder>>(orderUserList,HttpStatus.OK);		
@@ -61,7 +61,7 @@ public class OrderController extends HttpServlet{
 	
 	// 상품 아이디에 맞는 주문 내역 조회
 	@ApiOperation(value = "해당 상품 주문 내역 조회", notes = "상품 아이디에 맞는 주문 내역 조회")
-	@GetMapping("/orderProductList")
+	@GetMapping("/ProductList")
 	public ResponseEntity<List<ProductOrder>> OrderProductList(int productId){
 		List<ProductOrder> orderProductList = oService.getOrderProductList(productId);
 		return new ResponseEntity<List<ProductOrder>>(orderProductList,HttpStatus.OK);		
@@ -69,7 +69,7 @@ public class OrderController extends HttpServlet{
 	
 	// 주문 내역 수정
 	@ApiOperation(value = "주문 내역 수정", notes = "주문 아이디에 맞는 주문 내역 수정")
-	@PutMapping("/order/update")
+	@PutMapping("/update")
 	public ResponseEntity<Void> orderUpdate(@RequestBody ProductOrder productOrder){		
 		oService.updateOrder(productOrder);		
 		return new ResponseEntity<Void>(HttpStatus.OK);	

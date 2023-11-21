@@ -25,7 +25,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @Api(tags = "유저 컨트롤러")
-@RequestMapping("/api")
+@RequestMapping("/api/user")
 public class UserController {
 	// 응답을 편하게 하기 위해 상수로 지정
 	private static final String SUCCESS = "success";
@@ -111,7 +111,7 @@ public class UserController {
 
 	// 유저아이디에 해당하는 유저 조회
 	@ApiOperation("유저아이디에 해당하는 유저 조회")
-	@GetMapping("/user/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<User> selectList(@PathVariable String id) {
 		User user = userService.getUserOne(id);
 

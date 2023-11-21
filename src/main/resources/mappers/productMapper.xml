@@ -6,7 +6,7 @@
 	<!-- 상품 등록 -->
 	<insert id="writeProduct" parameterType="Product">
 		INSERT INTO Product
-		VALUES (0, #{categoryId}, #{productName}, #{cost}, #{price}, #{profit}, #{productImg}, #{productInfoImg}, false, now(), #{orderCnt}, 'N')
+		VALUES (0, #{categoryId}, #{productName}, #{cost}, #{price}, #{profit}, #{productImg}, #{productInfoImg}, false, now(), #{orderCnt}, 'N', #{productType}, #{registId})
 	</insert>
 	
 	<!-- 상품 정보 수정 -->
@@ -22,7 +22,9 @@
 			soldOut = false,
 			regDate = now(),
 			orderCnt = #{orderCnt},
-			productDelete = 'N'
+			productDelete = 'N',
+			productType = #{productType},
+			registId = #{registId}
 		WHERE productId = #{productId}
 	</update>
 	
@@ -52,7 +54,7 @@
 	<select id="getBestProduct" resultType="Product">
 		SELECT productId, productName, price, productImg, regDate, orderCnt
 		FROM Product
-		WHERE productDelete = 'N'
+		WHERE productDelete = 'N' AND productType = 1
 		ORDER BY orderCnt DESC
 		LIMIT 10;
 	</select>
@@ -61,9 +63,33 @@
 	<select id="getLatelyProduct" resultType="Product">
 		SELECT productId, productName, price, productImg, regDate, orderCnt
 		FROM Product
-		WHERE productDelete = 'N'
+		WHERE productDelete = 'N' AND productType = 1
 		ORDER BY regDate DESC
 		LIMIT 10;
 	</select>
+	
+	<!-- 상품 아이디에 해당하는 사이즈 조회 -->
+	<select id="getProductSize" resultType="String" parameterType="int">
+		SELECT productSize
+		FROM ProductSize
+		WHERE productId = #{productId}
+	</select>
+	
+	<!-- 상품 아이디에 해당하는 옵션 조회 -->
+	<select id="getProductOption" resultType="String" parameterType="int">
+		SELECT productOption
+		FROM ProductOption
+		WHERE productId = #{productId}
+	</select>
+	
+	<!-- 선수 리스트 조회 -->
+	<select id="getPlayerList" resultType="String">
+		SELECT playerName
+		FROM Player
+	</select>
+	
+	
+	
+	
 	
 </mapper>
