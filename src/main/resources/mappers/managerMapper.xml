@@ -34,7 +34,7 @@
 	<insert id="writeManagerComment" parameterType="ManagerComment">
 		INSERT INTO ManagerComment
 		VALUES
-		(0, #{managerId}, #{reviewId}, #{commentContent}, #{commentDate}, 'N')
+		(0, #{managerId}, #{reviewId}, #{commentContent}, now(), 'N')
 	</insert>
 	
 	<!-- 관리자 아이디에 해당하는 댓글 리스트 가져오기 -->
@@ -44,10 +44,17 @@
 		WHERE managerId = #{managerId}
 	</select>
 	
+	<!-- 댓글 아이디에 맞는 관리자 댓글 리스트 조회 -->
+	<select id="getManagerCommentIdList" parameterType="int" resultType="ManagerComment">
+		SELECT *
+		FROM ManagerComment
+		WHERE reviewId = #{reviewId}
+	</select>
+	
 	<!-- 관리자 댓글 수정 -->
 	<update id="updateManagerComment" parameterType="ManagerComment">
 		UPDATE ManagerComment
-		SET managerId = #{managerId}, reviewId = #{reviewId}, commentContent = #{commentContent}, commentDate = #{commentDate}
+		SET managerId = #{managerId}, reviewId = #{reviewId}, commentContent = #{commentContent}, commentDate = now()
 		WHERE commentId = #{commentId}
 	</update>
 	
@@ -62,7 +69,7 @@
 	<insert id="writeManagerNotice" parameterType="ManagerNotice">
 		INSERT INTO ManagerNotice
 		VALUES
-		(0, #{managerId}, #{noticeType}, #{noticeTitle}, #{noticeContent}, #{noticeWriter}, #{noticeImg}, 0, #{noticeDate}, 'N')
+		(0, #{managerId}, #{noticeType}, #{noticeTitle}, #{noticeContent}, #{noticeWriter}, #{noticeImg}, 0, now(), 'N')
 	</insert>
 	
 	<!-- 공지사항 전체 리스트 -->
@@ -90,7 +97,7 @@
 	<update id="updateManagerNotice" parameterType="ManagerNotice">
 		UPDATE ManagerNotice
 		SET managerId = #{managerId}, noticeType = #{noticeType}, noticeTitle = #{noticeTitle}, noticeContent = #{noticeContent},
-			noticeWriter = #{noticeWriter}, noticeImg = #{noticeImg}, noticeDate = #{noticeDate}
+			noticeWriter = #{noticeWriter}, noticeImg = #{noticeImg}, noticeDate = now()
 		WHERE noticeId = #{noticeId}
 	</update>
 	

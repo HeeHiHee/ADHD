@@ -89,6 +89,14 @@ public class ManagerController extends HttpServlet{
 		return new ResponseEntity<List<ManagerComment>>(managerCommentList,HttpStatus.OK);		
 	}
 	
+	// 댓글 아이디에 맞는 관리자 댓글 리스트 조회
+	@ApiOperation(value = "댓글 아이디에 맞는 관리자 댓글 리스트 조회", notes = "댓글 아이디에 맞는 관리자 댓글 리스트 조회")
+	@GetMapping("/managercommentidlist")
+	public ResponseEntity<List<ManagerComment>> managerCommentIdList(int reviewId){
+		List<ManagerComment> managerCommentIdList = mService.getManagerCommentIdList(reviewId);
+		return new ResponseEntity<List<ManagerComment>>(managerCommentIdList,HttpStatus.OK);		
+	}
+	
 	// 관리자 댓글 수정
 	@ApiOperation(value = "관리자 댓글 수정", notes = "댓글 아이디에 맞는 관리자 댓글 하나 수정")
 	@PutMapping("/managercomment/update")

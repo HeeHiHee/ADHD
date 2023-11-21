@@ -58,6 +58,12 @@ public class ManagerServiceImpl implements ManagerService {
 		return dao.getManagerCommentList(managerId);
 	}
 	
+	// 댓글 아이디에 맞는 관리자 댓글 리스트 조회
+	@Override
+	public List<ManagerComment> getManagerCommentIdList(int reviewId) {
+		return dao.getManagerCommentIdList(reviewId);
+	}
+	
 	// 관리자 댓글 수정
 	@Override
 	public void updateManagerComment(ManagerComment managerComment) {
@@ -117,6 +123,7 @@ public class ManagerServiceImpl implements ManagerService {
 		dao.updateViewCnt(id);
 		return dao.getOneManagerNotice(id);
 	}
+
 	
 
 }

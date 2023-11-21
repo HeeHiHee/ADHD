@@ -6,7 +6,7 @@
 	<!-- 상품 등록 -->
 	<insert id="writeProduct" parameterType="Product">
 		INSERT INTO Product
-		VALUES (0, #{categoryId}, #{productName}, #{cost}, #{price}, #{profit}, #{productImg}, #{productInfoImg}, false, #{regDate}, #{orderCnt}, 'N')
+		VALUES (0, #{categoryId}, #{productName}, #{cost}, #{price}, #{profit}, #{productImg}, #{productInfoImg}, false, now(), #{orderCnt}, 'N')
 	</insert>
 	
 	<!-- 상품 정보 수정 -->
@@ -20,7 +20,7 @@
 			productImg = #{productImg},
 			productInfoImg = #{productInfoImg},
 			soldOut = false,
-			regDate = #{regDate},
+			regDate = now(),
 			orderCnt = #{orderCnt},
 			productDelete = 'N'
 		WHERE productId = #{productId}

@@ -4,9 +4,6 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
--- -----------------------------------------------------
--- Schema adhd
--- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `adhd` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
 USE `adhd` ;
 
@@ -41,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `adhd`.`deliveryaddress` (
   `additionalPhone` VARCHAR(45) NULL DEFAULT NULL,
   `deliveryAddress1` VARCHAR(45) NOT NULL,
   `deliveryAddress2` VARCHAR(45) NOT NULL,
-  `deliveryMemo` VARCHAR(100) NULL,
+  `deliveryMemo` VARCHAR(100) NULL DEFAULT NULL,
   `defaultAddress` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`deliveryAddressId`),
   UNIQUE INDEX `deliveryAddressId_UNIQUE` (`deliveryAddressId` ASC) VISIBLE,
@@ -50,19 +47,22 @@ CREATE TABLE IF NOT EXISTS `adhd`.`deliveryaddress` (
     FOREIGN KEY (`userId`)
     REFERENCES `adhd`.`user` (`userId`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 0
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `adhd`.`player`
+-- Table `adhd`.`manager`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `adhd`.`player` (
-  `playerId` INT NOT NULL AUTO_INCREMENT,
-  `playerName` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`playerId`))
+CREATE TABLE IF NOT EXISTS `adhd`.`manager` (
+  `managerId` VARCHAR(45) NOT NULL,
+  `managerPw` VARCHAR(45) NOT NULL,
+  `managerName` VARCHAR(45) NOT NULL,
+  `managerDelete` VARCHAR(1) NOT NULL,
+  PRIMARY KEY (`managerId`),
+  UNIQUE INDEX `managerId_UNIQUE` (`managerId` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 0
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -105,6 +105,134 @@ CREATE TABLE IF NOT EXISTS `adhd`.`product` (
   CONSTRAINT `fk_product_productcategory`
     FOREIGN KEY (`categoryId`)
     REFERENCES `adhd`.`productcategory` (`categoryId`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 0
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `adhd`.`review`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `adhd`.`review` (
+  `reviewId` INT NOT NULL AUTO_INCREMENT,
+  `productId` INT NOT NULL,
+  `userId` VARCHAR(45) NOT NULL,
+  `type` VARCHAR(1) NOT NULL,
+  `reviewTitle` VARCHAR(45) NOT NULL,
+  `reviewDate` TIMESTAMP NULL DEFAULT NULL,
+  `reviewContent` VARCHAR(400) NOT NULL,
+  `reviewStar` INT NULL DEFAULT NULL,
+  `reviewDelete` VARCHAR(1) NOT NULL,
+  PRIMARY KEY (`reviewId`),
+  UNIQUE INDEX `reviewId_UNIQUE` (`reviewId` ASC) VISIBLE,
+  INDEX `fk_review_product1_idx` (`productId` ASC) VISIBLE,
+  INDEX `fk_review_user1_idx` (`userId` ASC) VISIBLE,
+  CONSTRAINT `fk_review_product1`
+    FOREIGN KEY (`productId`)
+    REFERENCES `adhd`.`product` (`productId`),
+  CONSTRAINT `fk_review_user1`
+    FOREIGN KEY (`userId`)
+    REFERENCES `adhd`.`user` (`userId`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 0
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `adhd`.`managercomment`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `adhd`.`managercomment` (
+  `commentId` INT NOT NULL AUTO_INCREMENT,
+  `managerId` VARCHAR(45) NOT NULL,
+  `reviewId` INT NOT NULL,
+  `commentContent` VARCHAR(400) NOT NULL,
+  `commentDate` TIMESTAMP NOT NULL,
+  `commentDelete` VARCHAR(1) NOT NULL,
+  PRIMARY KEY (`commentId`),
+  UNIQUE INDEX `commentId_UNIQUE` (`commentId` ASC) VISIBLE,
+  INDEX `fk_managercomment_manager1_idx` (`managerId` ASC) VISIBLE,
+  INDEX `fk_managercomment_review1_idx` (`reviewId` ASC) VISIBLE,
+  CONSTRAINT `fk_managercomment_manager1`
+    FOREIGN KEY (`managerId`)
+    REFERENCES `adhd`.`manager` (`managerId`),
+  CONSTRAINT `fk_managercomment_review1`
+    FOREIGN KEY (`reviewId`)
+    REFERENCES `adhd`.`review` (`reviewId`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 0
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `adhd`.`managernotice`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `adhd`.`managernotice` (
+  `noticeId` INT NOT NULL AUTO_INCREMENT,
+  `managerId` VARCHAR(45) NOT NULL,
+  `noticeType` VARCHAR(45) NOT NULL,
+  `noticeTitle` VARCHAR(45) NOT NULL,
+  `noticeContent` VARCHAR(400) NOT NULL,
+  `noticeWriter` VARCHAR(45) NOT NULL,
+  `noticeImg` VARCHAR(400) NULL DEFAULT NULL,
+  `noticeViews` INT NOT NULL,
+  `noticeDate` TIMESTAMP NOT NULL,
+  `noticeDelete` VARCHAR(1) NOT NULL,
+  PRIMARY KEY (`noticeId`),
+  UNIQUE INDEX `noticeId_UNIQUE` (`noticeId` ASC) VISIBLE,
+  INDEX `fk_notice_manager1_idx` (`managerId` ASC) VISIBLE,
+  CONSTRAINT `fk_notice_manager1`
+    FOREIGN KEY (`managerId`)
+    REFERENCES `adhd`.`manager` (`managerId`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `adhd`.`order`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `adhd`.`productorder` (
+  `orderId` INT NOT NULL AUTO_INCREMENT,
+  `userId` VARCHAR(45) NOT NULL,
+  `productId` INT NOT NULL,
+  `productPrice` INT NOT NULL,
+  `productSize` VARCHAR(45) NULL,
+  `productOption` VARCHAR(45) NULL,
+  `productDetailOption` VARCHAR(45) NULL,
+  `productCnt` INT NOT NULL,
+  `orderDate` TIMESTAMP NOT NULL,
+  `receiverName` VARCHAR(45) NOT NULL,
+  `receiverPhone` VARCHAR(45) NOT NULL,
+  `deliveryAddress1` VARCHAR(45) NOT NULL,
+  `deliveryAddress2` VARCHAR(45) NOT NULL,
+  `deliveryMemo` VARCHAR(100) NULL,
+  PRIMARY KEY (`orderId`),
+  UNIQUE INDEX `orderId_UNIQUE` (`orderId` ASC) VISIBLE,
+  INDEX `fk_order_user1_idx` (`userId` ASC) VISIBLE,
+  INDEX `fk_order_product1_idx` (`productId` ASC) VISIBLE,
+  CONSTRAINT `fk_order_user1`
+    FOREIGN KEY (`userId`)
+    REFERENCES `adhd`.`user` (`userId`),
+  CONSTRAINT `fk_order_product1`
+    FOREIGN KEY (`productId`)
+    REFERENCES `adhd`.`product` (`productId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `adhd`.`player`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `adhd`.`player` (
+  `playerId` INT NOT NULL AUTO_INCREMENT,
+  `playerName` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`playerId`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 0
 DEFAULT CHARACTER SET = utf8mb4
@@ -174,7 +302,6 @@ CREATE TABLE IF NOT EXISTS `adhd`.`productshoppingbasket` (
     FOREIGN KEY (`userId`)
     REFERENCES `adhd`.`user` (`userId`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 0
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -196,153 +323,6 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 0
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `adhd`.`order`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `adhd`.`order` (
-  `orderId` INT NOT NULL AUTO_INCREMENT,
-  `userId` VARCHAR(45) NOT NULL,
-  `totalPrice` INT NOT NULL,
-  `orderDate` TIMESTAMP NULL DEFAULT NOW(),
-  `card` VARCHAR(45) NULL,
-  `refundReason` VARCHAR(300) NULL,
-  `receiverName` VARCHAR(45) NOT NULL,
-  `deliveryAddress1` VARCHAR(45) NOT NULL,
-  `deliveryAddress2` VARCHAR(45) NOT NULL,
-  `receiverPhone` VARCHAR(45) NOT NULL,
-  `deliveryMemo` VARCHAR(100) NULL,
-  PRIMARY KEY (`orderId`),
-  UNIQUE INDEX `orderId_UNIQUE` (`orderId` ASC) VISIBLE,
-  INDEX `fk_order_user1_idx` (`userId` ASC) VISIBLE,
-  CONSTRAINT `fk_order_user1`
-    FOREIGN KEY (`userId`)
-    REFERENCES `adhd`.`user` (`userId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `adhd`.`orderDetail`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `adhd`.`orderDetail` (
-  `orderDetailId` INT NOT NULL AUTO_INCREMENT,
-  `orderId` INT NOT NULL,
-  `productId` INT NOT NULL,
-  `price` INT NULL,
-  `cnt` INT NOT NULL,
-  PRIMARY KEY (`orderDetailId`),
-  UNIQUE INDEX `orderDetailId_UNIQUE` (`orderDetailId` ASC) VISIBLE,
-  INDEX `fk_orderDetail_order1_idx` (`orderId` ASC) VISIBLE,
-  INDEX `fk_orderDetail_product1_idx` (`productId` ASC) VISIBLE,
-  CONSTRAINT `fk_orderDetail_order1`
-    FOREIGN KEY (`orderId`)
-    REFERENCES `adhd`.`order` (`orderId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_orderDetail_product1`
-    FOREIGN KEY (`productId`)
-    REFERENCES `adhd`.`product` (`productId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `adhd`.`review`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `adhd`.`review` (
-  `reviewId` INT NOT NULL AUTO_INCREMENT,
-  `productId` INT NOT NULL,
-  `userId` VARCHAR(45) NOT NULL,
-  `type` VARCHAR(1) NOT NULL,
-  `reviewTitle` VARCHAR(45) NOT NULL,
-  `reviewDate` TIMESTAMP NULL,
-  `reviewContent` VARCHAR(400) NOT NULL,
-  `reviewStar` INT NULL,
-  `reviewDelete` VARCHAR(1) NOT NULL,
-  PRIMARY KEY (`reviewId`),
-  INDEX `fk_review_product1_idx` (`productId` ASC) VISIBLE,
-  INDEX `fk_review_user1_idx` (`userId` ASC) VISIBLE,
-  UNIQUE INDEX `reviewId_UNIQUE` (`reviewId` ASC) VISIBLE,
-  CONSTRAINT `fk_review_product1`
-    FOREIGN KEY (`productId`)
-    REFERENCES `adhd`.`product` (`productId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_review_user1`
-    FOREIGN KEY (`userId`)
-    REFERENCES `adhd`.`user` (`userId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `adhd`.`manager`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `adhd`.`manager` (
-  `managerId` VARCHAR(45) NOT NULL,
-  `managerPw` VARCHAR(45) NOT NULL,
-  `managerName` VARCHAR(45) NOT NULL,
-  `managerDelete` VARCHAR(1) NOT NULL,
-  PRIMARY KEY (`managerId`),
-  UNIQUE INDEX `managerId_UNIQUE` (`managerId` ASC) VISIBLE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `adhd`.`managernotice`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `adhd`.`managernotice` (
-  `noticeId` INT NOT NULL AUTO_INCREMENT,
-  `managerId` VARCHAR(45) NOT NULL,
-  `noticeType` VARCHAR(45) NOT NULL,
-  `noticeTitle` VARCHAR(45) NOT NULL,
-  `noticeContent` VARCHAR(400) NOT NULL,
-  `noticeWriter` VARCHAR(45) NOT NULL,
-  `noticeImg` VARCHAR(400) NULL,
-  `noticeViews` INT NOT NULL,
-  `noticeDate` TIMESTAMP NOT NULL,
-  `noticeDelete` VARCHAR(1) NOT NULL,
-  PRIMARY KEY (`noticeId`),
-  UNIQUE INDEX `noticeId_UNIQUE` (`noticeId` ASC) VISIBLE,
-  INDEX `fk_notice_manager1_idx` (`managerId` ASC) VISIBLE,
-  CONSTRAINT `fk_notice_manager1`
-    FOREIGN KEY (`managerId`)
-    REFERENCES `adhd`.`manager` (`managerId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `adhd`.`managercomment`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `adhd`.`managercomment` (
-  `commentId` INT NOT NULL AUTO_INCREMENT,
-  `managerId` VARCHAR(45) NOT NULL,
-  `reviewId` INT NOT NULL,
-  `commentContent` VARCHAR(400) NOT NULL,
-  `commentDate` TIMESTAMP NOT NULL,
-  `commentDelete` VARCHAR(1) NOT NULL,
-  PRIMARY KEY (`commentId`),
-  UNIQUE INDEX `commentId_UNIQUE` (`commentId` ASC) VISIBLE,
-  INDEX `fk_managercomment_manager1_idx` (`managerId` ASC) VISIBLE,
-  INDEX `fk_managercomment_review1_idx` (`reviewId` ASC) VISIBLE,
-  CONSTRAINT `fk_managercomment_manager1`
-    FOREIGN KEY (`managerId`)
-    REFERENCES `adhd`.`manager` (`managerId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_managercomment_review1`
-    FOREIGN KEY (`reviewId`)
-    REFERENCES `adhd`.`review` (`reviewId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
@@ -435,7 +415,7 @@ VALUES
 
 INSERT INTO ProductShoppingBasket
 VALUES
-(0, 'ssafy1', 2, 'S(90)', '주장 자수 마킹(+30,000원)', 1, '')
+(0, 'ssafy1', 2, 'S(90)', '주장 자수 마킹(+30,000원)', 179000, 1, '')
 ;
 
 INSERT INTO Player
@@ -478,8 +458,9 @@ VALUES
 ;
 
 SELECT *
-FROM managernotice;
+FROM managercomment;
 
-
-
-
+INSERT INTO productorder
+VALUES
+(0, 'ssafy1', 3, 149000, 'M(95)', '선수 열전사 마킹(+20,000원)', '서호철(5)', 2, now(), '철수', '01055557777', '일본', '도쿄', '빨리 주세여')
+;
