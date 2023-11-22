@@ -124,18 +124,28 @@ public class UserController {
 
 		Map<String, Object> result = new HashMap<String, Object>();
 		HttpStatus status = null;
-
-		User dbUser = userService.getUserNick(user.getUserNickname());
-
-		// null 값이면 닉네임이 중복되는 게 없으므로 유저정보 수정 성공
-		if (dbUser == null) {
+		
+		User dbUser1 = userService.getUserOne(user.getUserId());
+		User dbUser2 = userService.getUserNick(user.getUserNickname());
+		
+		// 수정하는 사람의 아이디로 db에 있는 닉네임을 가져와서 같은지 확인
+		if (user.getUserNickname().equals(dbUser1.getUserNickname())) {
+			// 닉네임이 같다면 성공
 			userService.updateUser(user);
 			result.put("message", SUCCESS);
 			status = HttpStatus.ACCEPTED;
 		} else {
+			// 다르면 db에 해당 닉네임이 있는지 확인
+			if (dbUser2 == null) {
+				userService.updateUser(user);
+				result.put("message", SUCCESS);
+				status = HttpStatus.ACCEPTED;
+			}
 			// 닉네임이 겹칠때
-			result.put("message", 1);
-			status = HttpStatus.INTERNAL_SERVER_ERROR;
+			else {
+				result.put("message", 1);
+				status = HttpStatus.INTERNAL_SERVER_ERROR;
+			}
 		}
 		return new ResponseEntity<Map<String, Object>>(result, status);
 	}
