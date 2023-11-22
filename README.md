@@ -26,7 +26,7 @@ NC 다이노스 팀스토어를 참고하여 만든 야구 굿즈 쇼핑몰 사�
 - 로그인 시 JWT방식으로 DB값 검증
 - 회원가입 시 아이디, 닉네임 중복 검사 
 
-#### 마이 페이지
+#### 마이 페이지 - <a href="https://github.com/HeeHiHee/adhd_back/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(MyPage)">상세보기 - WIKI 이동</a>
 - 주소 API 연동
 - 회원정보 변경, 탈퇴
 - 배송지 관리(CRUD)
