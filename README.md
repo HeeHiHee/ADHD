@@ -22,7 +22,7 @@ NC 다이노스 팀스토어를 참고하여 만든 야구 굿즈 쇼핑몰 사�
 - **ORM** : Mybatis(2.x)
 
 ## 📌 주요 기능
-#### 로그인 / 회원가입 / 로그아웃
+#### 로그인 / 회원가입 - <a href="https://github.com/HeeHiHee/adhd_back.wiki.git">상세보기 - WIKI 이동</a>
 - 로그인 시 JWT방식으로 DB값 검증
 - 회원가입 시 아이디, 닉네임 중복 검사 
 
