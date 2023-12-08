@@ -38,8 +38,24 @@ public class ProductHeartController extends HttpServlet {
 	@ApiOperation("찜 상품 등록")
 	@PostMapping("")
 	public ResponseEntity<ProductHeart> heartWrite(@RequestBody ProductHeart productHeart){
-		hService.writeHeart(productHeart);
-		return new ResponseEntity<ProductHeart>(productHeart, HttpStatus.OK);
+		// 이미 찜 상품에 등록이 되어있는지 확인
+		List<ProductHeart> DBlist = hService.getHeartList(productHeart.getUserId());
+		boolean flag = false;
+		for(ProductHeart sample : DBlist) {
+			// 이미 찜한 상품이라면 flag가 true로 바뀜
+			if(sample.getProductId() == productHeart.getProductId()) {
+				flag = true;
+				break;
+			}
+		}
+		if(flag) {
+			// db에 저장은 안되지만 OK
+			return new ResponseEntity<>(HttpStatus.OK);
+		}else {
+			hService.writeHeart(productHeart);
+			return new ResponseEntity<ProductHeart>(productHeart, HttpStatus.OK);
+		}
+		
 	}
 	
 	// 유저 아이디에 해당하는 찜 상품 리스트

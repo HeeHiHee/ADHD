@@ -34,11 +34,12 @@ public class OrderController extends HttpServlet{
 	private OrderService oService;
 	
 	// 주문 내역 등록
-	@ApiOperation(value = "주문 내역 등록", notes = "주문이 완료된 내역들을 db에 저장")
+	@ApiOperation(value = "주문 내역 등록", notes = "주문이 완료된 내역들을 db에 저장, 주문한 상품들의 구매량 +1 증가")
 	@PostMapping("")
 	public ResponseEntity<?> OrderWrite(@RequestBody List<ProductOrder> orderList){
 		for(ProductOrder order : orderList) {
 			oService.writeOrder(order);
+			oService.updateOrderCnt(order.getProductId());
 		}
 		return new ResponseEntity<>("List processed successfully", HttpStatus.OK);		
 	}

@@ -51,7 +51,7 @@ public interface ProductDao {
 	// 인기있는 판매자 리스트 3명
 	List<User> getSellerbest();
 
-	// 인기있는 판매자 상품 리스트
+	// 판매자 아이디에 해당하는 상품 리스트
 	List<Product> getSellerHandmadebest(String registId);
 	
 

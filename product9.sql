@@ -4,8 +4,8 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
-CREATE SCHEMA IF NOT EXISTS `adhd` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
-USE `adhd` ;
+CREATE SCHEMA IF NOT EXISTS `adhd` DEFAULT CHARACTER SET utf8mb4 ;
+USE adhd ;
 
 -- -----------------------------------------------------
 -- Table `adhd`.`user`
@@ -22,8 +22,7 @@ CREATE TABLE IF NOT EXISTS `adhd`.`user` (
   PRIMARY KEY (`userId`),
   UNIQUE INDEX `userId_UNIQUE` (`userId` ASC) VISIBLE)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -48,8 +47,7 @@ CREATE TABLE IF NOT EXISTS `adhd`.`deliveryaddress` (
     REFERENCES `adhd`.`user` (`userId`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 0
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -63,8 +61,7 @@ CREATE TABLE IF NOT EXISTS `adhd`.`manager` (
   PRIMARY KEY (`managerId`),
   UNIQUE INDEX `managerId_UNIQUE` (`managerId` ASC) VISIBLE)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -79,8 +76,7 @@ CREATE TABLE IF NOT EXISTS `adhd`.`productcategory` (
   UNIQUE INDEX `categoryId_UNIQUE` (`categoryId` ASC) VISIBLE)
 ENGINE = InnoDB
 AUTO_INCREMENT = 0
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -109,8 +105,7 @@ CREATE TABLE IF NOT EXISTS `adhd`.`product` (
     REFERENCES `adhd`.`productcategory` (`categoryId`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 0
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -138,8 +133,7 @@ CREATE TABLE IF NOT EXISTS `adhd`.`review` (
     REFERENCES `adhd`.`user` (`userId`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 0
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -164,8 +158,7 @@ CREATE TABLE IF NOT EXISTS `adhd`.`managercomment` (
     REFERENCES `adhd`.`review` (`reviewId`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 0
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -189,8 +182,7 @@ CREATE TABLE IF NOT EXISTS `adhd`.`managernotice` (
     FOREIGN KEY (`managerId`)
     REFERENCES `adhd`.`manager` (`managerId`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -224,8 +216,7 @@ CREATE TABLE IF NOT EXISTS `adhd`.`productorder` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -237,8 +228,7 @@ CREATE TABLE IF NOT EXISTS `adhd`.`player` (
   PRIMARY KEY (`playerId`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 0
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -258,8 +248,7 @@ CREATE TABLE IF NOT EXISTS `adhd`.`productheart` (
     FOREIGN KEY (`userId`)
     REFERENCES `adhd`.`user` (`userId`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -277,8 +266,7 @@ CREATE TABLE IF NOT EXISTS `adhd`.`productoption` (
     REFERENCES `adhd`.`product` (`productId`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 0
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -304,8 +292,7 @@ CREATE TABLE IF NOT EXISTS `adhd`.`productshoppingbasket` (
     FOREIGN KEY (`userId`)
     REFERENCES `adhd`.`user` (`userId`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -323,8 +310,7 @@ CREATE TABLE IF NOT EXISTS `adhd`.`productsize` (
     REFERENCES `adhd`.`product` (`productId`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 0
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
@@ -332,7 +318,7 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
-INSERT INTO User
+INSERT INTO user
 VALUES
 ('ssafy1', '1234', '최싸피', '01012345678', 'ssafy1@ssafy.com', '췍췍', true, 'Y'),
 ('ssafy2', '5678', '이싸피', '01056781234', 'ssafy2@ssafy.com', '잉잉', false, 'Y'),
@@ -340,7 +326,7 @@ VALUES
 ('chulsu', '7777', '김철수', '01056781234', 'ssafy2@ssafy.com', '철수', false, 'Y')
 ;
 
-INSERT INTO ProductCategory
+INSERT INTO productcategory
 VALUES
 (0, '유니폼', 1, 0),
 (0, '모자', 1, 0),
@@ -361,7 +347,7 @@ VALUES
 (0, '홈&오피스', 2, 4)
 ;
 
-INSERT INTO Product
+INSERT INTO product
 VALUES
 (0, 5, '2023 어센틱 민트 유니폼', 0, 144000, 144000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/70321261-3527-41c8-8377-1ab2b48f64f520230716.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/09bae4bd-afcc-4e45-96f7-599f16326a6c20230716.jpg', false, "2023-10-11", 5, 'N', 1, ''),
 (0, 5, '2023 어센틱 도구리 유니폼', 0, 149000, 149000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/791f7ade-bdcd-46b9-ad3b-1ca459c5f27520230515.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/492a05c0-5367-4f9f-9a95-d4b1fc5b424b20230516.jpg', false, "2023-11-11", 8, 'N', 1, ''),
@@ -388,17 +374,23 @@ VALUES
 (0, 17, '퍼즈업 아크릴 키링', 0, 7000, 7000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, "2023-10-1", 0, 'N', 1, '')
 ;
 
-INSERT INTO Product
+INSERT INTO product
 VALUES
-(0, null, '내가 만든 키링', 0, 5000, 5000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 4, 'N', 2, 'jjanggu'),
-(0, null, '니가 만든 키링', 0, 5000, 5000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 3, 'N', 2, 'jjanggu'),
-(0, null, '김주원 키링', 0, 6000, 6000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 2, 'N', 2, 'jjanggu'),
+(0, null, '김주원 키링', 0, 5000, 5000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 4, 'N', 2, 'jjanggu'),
+(0, null, '박건우 키링', 0, 5000, 5000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 3, 'N', 2, 'jjanggu'),
+(0, null, '윤형준 키링', 0, 6000, 6000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 2, 'N', 2, 'ssafy2'),
 (0, null, '서호철 키링', 0, 6000, 6000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 1, 'N', 2, 'chulsu'),
 (0, null, '도태훈 키링', 0, 6000, 6000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 0, 'N', 2, 'chulsu'),
-(0, null, '박건우 키링', 0, 6000, 6000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 0, 'N', 2, 'chulsu')
+(0, null, '박대온 키링', 0, 6000, 6000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 0, 'N', 2, 'chulsu'),
+(0, null, '박민우 키링', 0, 5000, 5000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 4, 'N', 2, 'jjanggu'),
+(0, null, '손아섭 키링', 0, 5000, 5000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 1, 'N', 2, 'jjanggu'),
+(0, null, '오영수 키링', 0, 6000, 6000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 2, 'N', 2, 'ssafy2'),
+(0, null, '페디 키링', 0, 5000, 5000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 5, 'N', 2, 'jjanggu'),
+(0, null, '김형준 키링', 0, 5000, 5000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 3, 'N', 2, 'jjanggu'),
+(0, null, '권희동 키링', 0, 6000, 6000, 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/b096259a-3ed4-43e3-9adf-e979f1abc19c20230905.jpg', 'https://d29trs2nbedcfj.cloudfront.net/erp/shop/797c9bd1-2f5f-45a0-b007-01d2cb33c10620230905.jpg', false, now(), 2, 'N', 2, 'ssafy2')
 ;
 
-INSERT INTO productSize
+INSERT INTO productsize
 VALUES
 (0, 1, 'S(90)'), (0, 1, 'M(95)'), (0, 1, 'L(100)'), (0, 1, 'XL(105)'), (0, 1, '2XL(110)'), (0, 1, '4XL(120)'),
 (0, 2, 'S(90)'), (0, 2, 'M(95)'), (0, 2, 'L(100)'), (0, 2, 'XL(105)'), (0, 2, '2XL(110)'), (0, 2, '4XL(120)'),
@@ -417,7 +409,7 @@ VALUES
 (0, 17, 'M(95)'), (0, 17, 'L(100)'), (0, 17, 'XL(105)'), (0, 17, '2XL(110)'), (0, 17, '4XL(120)'), (0, 17, '5-6'), (0, 17, '7-8'), (0, 17, '9-10'), (0, 17, '11-12'), (0, 17, '13-14')
 ;
 
-INSERT INTO productOption
+INSERT INTO productoption
 VALUES
 (0, 1, '주장 자수 마킹(+30,000원)'), (0, 1, '자유 자수 마킹(+30,000원)'), (0, 1, '자유 열전사 마킹(+25,000원)'), (0, 1, '선수 자수 마킹(+25,000원)'), (0, 1, '선수 열전사 마킹(+20,000원)'),
 (0, 2, '주장 자수 마킹(+30,000원)'), (0, 2, '자유 자수 마킹(+30,000원)'), (0, 2, '선수 자수 마킹(+25,000원)'),
@@ -427,12 +419,12 @@ VALUES
 (0, 6, '마킹없음'), (0, 6, '자유 열전사 마킹(+25,000원)'), (0, 6, '선수 열전사 마킹(+20,000원)')
 ;
 
-INSERT INTO ProductShoppingBasket
+INSERT INTO productshoppingbasket
 VALUES
 (0, 'ssafy1', 2, 'S(90)', '주장 자수 마킹(+30,000원)', 179000, 1, '')
 ;
 
-INSERT INTO Player
+INSERT INTO player
 VALUES
 (0, '심창민(1)'), (0, '박민우(2)'), (0, '김수윤(3)'), (0, '서호철(5)'), (0, '김철호(6)'), (0, '김주원(7)'), (0, '김재균(8)'), (0, '태너(9)'), (0, '박세혁(10)'), (0, '송명기(11)'),
 (0, '정진기(12)'), (0, '페디(13)'), (0, '전루건(14)'), (0, '김태현(15)'), (0, '도태훈(16)'), (0, '김영규(17)'), (0, '박석민(18)'), (0, '신영우(19)'), (0, '최성영(20)'), (0, '김시훈(21)'),
@@ -476,14 +468,10 @@ VALUES
 (0, 'ssafy1', 3, 149000, 'M(95)', '선수 열전사 마킹(+20,000원)', '서호철(5)', 2, now(), '철수', '01055557777', '일본', '도쿄', '빨리 주세여')
 ;
 
-SELECT *
-FROM Product;
+INSERT INTO managernotice
+VALUES
+(0, 'chulsu' 'N', '공지사항1', '공지사항1입니다.', '짱구', 'slkjewls', 0, now(), 'N')
+;
 
 SELECT *
-FROM ProductOption
-WHERE productId = 1;
-
-SELECT *
-FROM Product
-
-
+FROM managernotice;

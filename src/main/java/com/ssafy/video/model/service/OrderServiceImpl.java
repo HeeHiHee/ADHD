@@ -15,6 +15,12 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderDao dao;
 	
+	// 상품 구매량 증가
+	@Override
+	public void updateOrderCnt(int productId) {
+		dao.updateOrderCnt(productId);
+	}
+	
 	// 주문내역 등록 
 	@Override
 	public void writeOrder(ProductOrder order) {
@@ -44,6 +50,8 @@ public class OrderServiceImpl implements OrderService {
 	public void updateOrder(ProductOrder productOrder) {
 		dao.updateOrder(productOrder);
 	}
+
+	
 	
 	
 

@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.video.model.dao.ProductDao">
+
 	<!-- 상품 등록 -->
 	<insert id="writeProduct" parameterType="Product">
 		INSERT INTO Product
@@ -88,7 +89,38 @@
 		FROM Player
 	</select>
 	
+	<!-- 자체제작 상품 전체 리스트-->
+	<select id="getHandmade" resultType="Product">
+		SELECT *
+		FROM Product
+		WHERE productType = 2;
+	</select>
 	
+	<!-- 인기있는 자체제작 상품 -->
+	<select id="getHandmadebest" resultType="Product">
+		SELECT *
+		FROM product
+		WHERE productType = 2
+		ORDER BY orderCnt DESC
+		LIMIT 5
+	</select>
+	
+	<!-- 인기있는 판매자 리스트 3명 -->
+	<select id="getSellerbest" resultType="String">
+		SELECT registId
+		FROM Product
+		WHERE productType = 2
+		GROUP BY registId
+		ORDER BY SUM(orderCnt) DESC
+		LIMIT 3
+	</select>
+	
+	<!-- 인기있는 판매자 상품 리스트 -->
+	<select id="getSellerHandmadebest" parameterType="String" resultType="Product">
+		SELECT *
+		FROM Product
+		WHERE registId = #{registId};
+	</select>
 	
 	
 	

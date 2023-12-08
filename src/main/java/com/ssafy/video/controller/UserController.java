@@ -46,21 +46,20 @@ public class UserController {
 	public ResponseEntity<Map<String, Object>> signup(@RequestBody User user) throws UnsupportedEncodingException {
 		Map<String, Object> result = new HashMap<String, Object>();
 		HttpStatus status = null;
-		
+
 		User dbUser1 = userService.getUserOne(user.getUserId());
 		User dbUser2 = userService.getUserNick(user.getUserNickname());
-		
+
 		// null 값이면 id가 중복되는 게 없으므로 회원가입 성공
-		if(dbUser1 == null && dbUser2 == null) {
+		if (dbUser1 == null && dbUser2 == null) {
 			userService.signup(user);
 			result.put("message", SUCCESS);
 			status = HttpStatus.ACCEPTED;
-		}
-		else {
+		} else {
 			// 아이디가 겹칠 때
-			if(dbUser1 != null) {
+			if (dbUser1 != null) {
 				result.put("message", 1);
-				status = HttpStatus.INTERNAL_SERVER_ERROR;				
+				status = HttpStatus.INTERNAL_SERVER_ERROR;
 			}
 			// 닉네임이 겹칠때
 			else {
@@ -68,7 +67,7 @@ public class UserController {
 				status = HttpStatus.INTERNAL_SERVER_ERROR;
 			}
 		}
-		
+
 		return new ResponseEntity<Map<String, Object>>(result, status);
 	}
 
@@ -88,7 +87,7 @@ public class UserController {
 			User dbUser = userService.login(id);
 
 			// db에 저장된 유저의 비밀번호랑 입력받은 유저의 비밀번호를 비교
-			if (dbUser != null && pw.equals(dbUser.getUserPw())) {
+			if (dbUser != null && pw.equals(dbUser.getUserPw()) && dbUser.getUserStatus().equals("Y")) {
 				// 비밀번호가 일치하면 로그인 성공
 //				System.out.println(id + " " + pw);
 //				System.out.println(dbUser.getUserId() + " " + dbUser.getUserPw());
@@ -117,38 +116,54 @@ public class UserController {
 
 		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
-	
+
 	// 유저 정보 수정하기
 	@ApiOperation("유저 정보 수정하기")
 	@PutMapping("/mypage/userInfo")
-	public ResponseEntity<Void> doUpdate(@RequestBody User user){
-		userService.updateUser(user);		
-		return new ResponseEntity<Void>(HttpStatus.OK);		
+	public ResponseEntity<Map<String, Object>> doUpdate(@RequestBody User user) {
+
+		Map<String, Object> result = new HashMap<String, Object>();
+		HttpStatus status = null;
+		
+		User dbUser1 = userService.getUserOne(user.getUserId());
+		User dbUser2 = userService.getUserNick(user.getUserNickname());
+		
+		// 수정하는 사람의 아이디로 db에 있는 닉네임을 가져와서 같은지 확인
+		if (user.getUserNickname().equals(dbUser1.getUserNickname())) {
+			// 닉네임이 같다면 성공
+			userService.updateUser(user);
+			result.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		} else {
+			// 다르면 db에 해당 닉네임이 있는지 확인
+			if (dbUser2 == null) {
+				userService.updateUser(user);
+				result.put("message", SUCCESS);
+				status = HttpStatus.ACCEPTED;
+			}
+			// 닉네임이 겹칠때
+			else {
+				result.put("message", 1);
+				status = HttpStatus.INTERNAL_SERVER_ERROR;
+			}
+		}
+		return new ResponseEntity<Map<String, Object>>(result, status);
 	}
-	
-	// 유저 탈퇴 
+
+	// 유저 탈퇴
 	@ApiOperation("유저 탈퇴")
 	@PutMapping("/usercancel/{id}")
-	public ResponseEntity<Void> UserCancel(@PathVariable String id){
+	public ResponseEntity<Void> UserCancel(@PathVariable String id) {
 		userService.UserCancel(id);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
-	
+
 	// 유저 정지
 	@ApiOperation("유저 정지")
 	@PutMapping("/userban/{id}")
-	public ResponseEntity<Void> UserBan(@PathVariable String id){
+	public ResponseEntity<Void> UserBan(@PathVariable String id) {
 		userService.UserBan(id);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }
