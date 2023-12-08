@@ -30,7 +30,7 @@ public class ReviewServiceImpl implements ReviewService {
 		return dao.getReview();
 	}
 	
-	// 리뷰 전체 조회
+	// 문의 전체 조회
 	@Override
 	public List<Review> getQuestion() {
 		return dao.getQuestion();

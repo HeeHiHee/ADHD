@@ -44,7 +44,7 @@ public class OrderController extends HttpServlet{
 		return new ResponseEntity<>("List processed successfully", HttpStatus.OK);		
 	}
 	
-	// 리뷰 리스트 조회
+	// 주문 내역 전체 조회
 	@ApiOperation(value = "주문 내역 전체 조회", notes = "모든 주문 내역을 조회함")
 	@GetMapping("/List")
 	public ResponseEntity<List<ProductOrder>> OrderList(){

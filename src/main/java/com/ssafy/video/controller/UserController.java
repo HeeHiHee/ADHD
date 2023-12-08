@@ -30,8 +30,6 @@ public class UserController {
 	// 응답을 편하게 하기 위해 상수로 지정
 	private static final String SUCCESS = "success";
 	private static final String FAIL = "fail";
-//	private static final String FAIL_ID = "ID exists";
-//	private static final String FAIL_NICK = "NICKNAME exists";
 
 	@Autowired
 	private JwtUtil jwtUtil;
