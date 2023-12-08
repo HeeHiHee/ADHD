@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.video.model.dao.ProductDao">
+
+	<!-- 상품 등록 -->
+	<insert id="writeProduct" parameterType="Product">
+		INSERT INTO Product
+		VALUES (0, #{categoryId}, #{productName}, #{cost}, #{price}, #{profit}, #{productImg}, #{productInfoImg}, false, now(), #{orderCnt}, 'N', #{productType}, #{registId})
+	</insert>
+	
+	<!-- 상품 정보 수정 -->
+	<update id="updateProduct" parameterType="Product">
+		UPDATE Product
+		SET categoryId = #{categoryId}, 
+			productName = #{productName},
+			cost = #{cost},
+			price = #{price},
+			profit = #{profit},
+			productImg = #{productImg},
+			productInfoImg = #{productInfoImg},
+			soldOut = false,
+			regDate = now(),
+			orderCnt = #{orderCnt},
+			productDelete = 'N',
+			productType = #{productType},
+			registId = #{registId}
+		WHERE productId = #{productId}
+	</update>
+	
+	<!-- 상품 번호에 해당하는 상품 삭제 -->
+	<update id="removeProduct" parameterType="int">
+		UPDATE product
+		SET productDelete = 'Y'
+		WHERE productId = #{productId};
+	</update>
+	
+	<!-- 분류별 상품 조회 -->
+	<select id="getCategoryProduct" resultType="Product" parameterType="int">
+		SELECT p.*
+		FROM Product p
+		JOIN ProductCategory pc ON p.categoryId = pc.categoryId
+		WHERE (pc.parentCategoryId = #{id} OR pc.categoryId = #{id}) AND productDelete = 'N';
+	</select>
+	
+	<!-- 상품 하나 조회 -->
+	<select id="getProductOne" parameterType="int">
+		SELECT *
+		FROM Product
+		WHERE productId = #{productId} AND productDelete = 'N';
+	</select>
+	
+	<!-- 인기 상품 조회 -->
+	<select id="getBestProduct" resultType="Product">
+		SELECT productId, productName, price, productImg, regDate, orderCnt
+		FROM Product
+		WHERE productDelete = 'N' AND productType = 1
+		ORDER BY orderCnt DESC
+		LIMIT 10;
+	</select>
+	
+	<!-- 최근 상품 조회 -->
+	<select id="getLatelyProduct" resultType="Product">
+		SELECT productId, productName, price, productImg, regDate, orderCnt
+		FROM Product
+		WHERE productDelete = 'N' AND productType = 1
+		ORDER BY regDate DESC
+		LIMIT 10;
+	</select>
+	
+	<!-- 상품 아이디에 해당하는 사이즈 조회 -->
+	<select id="getProductSize" resultType="String" parameterType="int">
+		SELECT productSize
+		FROM ProductSize
+		WHERE productId = #{productId}
+	</select>
+	
+	<!-- 상품 아이디에 해당하는 옵션 조회 -->
+	<select id="getProductOption" resultType="String" parameterType="int">
+		SELECT productOption
+		FROM ProductOption
+		WHERE productId = #{productId}
+	</select>
+	
+	<!-- 선수 리스트 조회 -->
+	<select id="getPlayerList" resultType="String">
+		SELECT playerName
+		FROM Player
+	</select>
+	
+	<!-- 자체제작 상품 전체 리스트-->
+	<select id="getHandmade" resultType="Product">
+		SELECT *
+		FROM Product
+		WHERE productType = 2;
+	</select>
+	
+	<!-- 인기있는 자체제작 상품 -->
+	<select id="getHandmadebest" resultType="Product">
+		SELECT *
+		FROM product
+		WHERE productType = 2
+		ORDER BY orderCnt DESC
+		LIMIT 5
+	</select>
+	
+	<!-- 인기있는 판매자 리스트 3명 -->
+	<select id="getSellerbest" resultType="String">
+		SELECT registId
+		FROM Product
+		WHERE productType = 2
+		GROUP BY registId
+		ORDER BY SUM(orderCnt) DESC
+		LIMIT 3
+	</select>
+	
+	<!-- 인기있는 판매자 상품 리스트 -->
+	<select id="getSellerHandmadebest" parameterType="String" resultType="Product">
+		SELECT *
+		FROM Product
+		WHERE registId = #{registId};
+	</select>
+	
+	
+	
+</mapper>
