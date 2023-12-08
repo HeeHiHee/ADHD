@@ -85,7 +85,7 @@ public class UserController {
 			User dbUser = userService.login(id);
 
 			// db에 저장된 유저의 비밀번호랑 입력받은 유저의 비밀번호를 비교
-			if (dbUser != null && pw.equals(dbUser.getUserPw())) {
+			if (dbUser != null && pw.equals(dbUser.getUserPw()) && dbUser.getUserStatus().equals("Y")) {
 				// 비밀번호가 일치하면 로그인 성공
 //				System.out.println(id + " " + pw);
 //				System.out.println(dbUser.getUserId() + " " + dbUser.getUserPw());
